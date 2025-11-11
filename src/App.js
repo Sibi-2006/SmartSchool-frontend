@@ -5,6 +5,7 @@ import ChooseTheUser from "./component/ChooseTheUser";
 import AdminLogin from "./component/Login/AdminLogin";
 import TeacherLogin from "./component/Login/TeacherLogin";
 import StudentLogin from "./component/Login/StudentLogin";
+import AdminDashBoard from "./component/Admin/AdminDashBoard"
 function App() {
   return (
     <div>
@@ -18,7 +19,8 @@ function App() {
           <Route path="/login/admin" element={<AdminLogin/>} />
           <Route path="/login/teachers" element={ <TeacherLogin /> } />
           <Route path="/login/students" element={<StudentLogin />} />
-          
+          {/*Admin routers */}
+          <Route path="/admin/dashboard" element={ <AdminDashBoard />} />
         </Routes>
       </BrowserRouter>
     </div>
