@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { GlobalVariableContext } from "../Context/GlobalVariable";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react"; // 🪶 using lucide-react for icons
+import { Menu, X } from "lucide-react"; 
 import pfp from "../image/profile.webp";
 
 export default function Header() {

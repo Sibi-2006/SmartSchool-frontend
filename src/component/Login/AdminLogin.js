@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { GlobalVariableContext } from "../../Context/GlobalVariable";
 export default function AdminLogin() {
   const [admin, setAdmin] = useState({ adminId: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const { baseUrl } = useContext(GlobalVariableContext)
 
   const isValid = () => {
     const tempError = {};
@@ -27,7 +28,7 @@ export default function AdminLogin() {
 
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:3500/api/adminlogin/login", admin);
+      const res = await axios.post(`${baseUrl}/adminlogin/login`, admin);
 
       localStorage.setItem("adminToken", res.data.token);
       setMessage(res.data.message);
