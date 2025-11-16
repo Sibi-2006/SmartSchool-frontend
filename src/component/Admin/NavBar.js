@@ -35,7 +35,9 @@ export default function NavBar() {
            className="nav-btn"
            onClick={()=>navigate(`${baseUrl}/teacher`)}
            >Create Teacher's</button>
-          <button className="nav-btn">Create Student's</button>
+          <button className="nav-btn"
+          onClick={()=>navigate(`${baseUrl}/student`)}
+          >Create Student's</button>
         </nav>
       </div>
     </>

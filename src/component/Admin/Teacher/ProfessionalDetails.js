@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from "react";
-//         : "",
-//         : "",
-//         : "",
-//         : "",
-//         : ""
 export default function ProfessionalDetails({handleNextBtn , handlePreviousBtn , errors,teacherData,setTeacherData}) {
     const handleChanges = (e) =>{
         setTeacherData({

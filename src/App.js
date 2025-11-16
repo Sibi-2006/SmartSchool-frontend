@@ -7,6 +7,7 @@ import TeacherLogin from "./component/Login/TeacherLogin";
 import StudentLogin from "./component/Login/StudentLogin";
 import AdminDashBoard from "./component/Admin/AdminDashBoard"
 import CreateTeacher from "./component/Admin/CreateTeacher";
+import CreateStudent from "./component/Admin/Student/CreateStudent";
 function App() {
   return (
     <div>
@@ -23,6 +24,7 @@ function App() {
           {/*Admin routers */}
           <Route path="/admin/dashboard" element={ <AdminDashBoard />} />
           <Route path="/admin/dashboard/create/teacher" element={<CreateTeacher />} />
+          <Route path="/admin/dashboard/create/student" element={<CreateStudent />} /> 
         </Routes>
       </BrowserRouter>
     </div>

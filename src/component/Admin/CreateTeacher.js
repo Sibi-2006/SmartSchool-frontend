@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import NavBar from './NavBar'
 import TeacherBasicDetails from './Teacher/TeacherBasicDetails'
 import ProfessionalDetails from './Teacher/ProfessionalDetails'
 import LoginCredentials from './Teacher/LoginCredentials';
-
+import { GlobalVariableContext } from "../../Context/GlobalVariable"
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 export default function CreateTeacher() {
     const [steps , setSteps ] = useState(1);
     const [errors, setErrors] = useState({});
-
+    const { baseUrl } = useContext(GlobalVariableContext);
+    const navigate = useNavigate();
     const [teacherData, setTeacherData] = useState({
         fullName: "",
         email: "",
@@ -72,10 +75,54 @@ const validateStep = () => {
         setSteps((prev)=> prev-1);
     }
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        console.log(teacherData)
-    }
+   const handleSubmit = async (e) => {
+  e.preventDefault();
+  console.log(teacherData);
+
+  const token = localStorage.getItem("adminToken");
+
+  if (!token) {
+    navigate("/login/admin");
+    return;
+  }
+
+  try {
+      await axios.post(
+      `${baseUrl}/create/teacher`,
+      teacherData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,  
+        },
+      }
+    );
+
+    setTeacherData({
+        fullName: "",
+        email: "",
+        phone: "",
+        address: "",
+        gender: "",
+        dob: "",
+        teacherId: "",
+        department: "",
+        designation: "",
+        joiningDate: "",
+        qualification: "",
+        experience: "",
+        loginId:"",
+        password:"",
+        AssignedClass :"",
+        Salary:""
+    })
+
+
+  } catch (err) {
+    console.log(err.response?.data || err.message);
+  }
+};
+
+    
 
   return (
     <div className="flex ">
