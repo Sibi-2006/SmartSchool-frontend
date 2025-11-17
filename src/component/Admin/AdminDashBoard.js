@@ -7,15 +7,15 @@ export default function AdminDashboard() {
   const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
   const { baseUrl } = useContext(GlobalVariableContext)
-
+  const token = localStorage.getItem("adminToken");
+  const baseNavUrl ="/admin/dashboard/view/details"
   useEffect(() => {
     const fetchAdmin = async () => {
-      const token = localStorage.getItem("adminToken");
+      
       if (!token) {
         navigate("/login/admin");
         return;
       }
-
       try {
         const res = await axios.get(`${baseUrl}/adminlogin/dashboard`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -26,20 +26,66 @@ export default function AdminDashboard() {
         navigate("/login/admin"); // redirect if token invalid
       }
     };
-
     fetchAdmin();
-  }, [navigate]);
-
-  const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    navigate("/login/admin");
-  };
+  }, [navigate,baseUrl,token]);
+  const [count , setCount ] = useState(0);
+  useEffect(()=>{
+    const fetchCountAdmin = async()=>{
+      if (!token) {
+        navigate("/login/admin");
+        return;
+      }
+      try{
+        const res = await axios.get(`${baseUrl}/adminlogin/getMax`,{
+        headers: { Authorization: `Bearer ${token}` },
+        })
+        setCount(res.data.count)
+      }catch(err){
+        console.log(err.message)
+      }
+      
+    }
+    fetchCountAdmin();
+  },[baseUrl,token,navigate])
+  // const handleLogout = () => {
+  //   localStorage.removeItem("adminToken");
+  //   navigate("/login/admin");
+  // };
 
   if (!admin) return <p className="text-center mt-10">Loading...</p>;
 
   return (
     <div className="p-8">
      <NavBar/>
+     <div className=" w-full md:w-3/4 md:fixed right-0 flex items-center justify-center h-screen ">
+      <div className="flex items-center justify-center flex-col gap-4 overflow-y-auto ">
+          <div className="adminBox">
+              <h1 className="form-title">ADMIN</h1>
+              <p className=" text-dark ">Total Admin : <samp className=" font-bold text-primary">{count.adminCount}</samp></p>
+              <button className="main-btn"
+                onClick={()=>navigate(`${baseNavUrl}/admin`)}
+                >View Admin's details</button>
+          </div>
+          <div className=" flex flex-col  md:flex-row justify-center items-center g-5">
+            <div className="adminBox">
+              <h1 className="form-title">TEACHER</h1>
+              <p className=" text-dark ">Total Teacher : <samp className=" font-bold text-primary">{count.teacherCount}</samp></p>
+              <button
+                 className="main-btn"
+                 onClick={()=>navigate(`${baseNavUrl}/teacher`)}
+                 >View Teacher's details</button>
+            </div>
+            <div className="adminBox">
+              <h1 className="form-title">STUDENT</h1>
+              <p className=" text-dark ">Total Student : <samp className=" font-bold text-primary">{count.studentCount}</samp></p>
+              <button
+                 className="main-btn"
+                 onClick={()=>navigate(`${baseNavUrl}/student`)}
+                 >View Student's details</button>
+            </div>
+          </div>
+      </div>
+     </div>
     </div>
   );
 }

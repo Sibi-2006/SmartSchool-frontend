@@ -8,6 +8,11 @@ import StudentLogin from "./component/Login/StudentLogin";
 import AdminDashBoard from "./component/Admin/AdminDashBoard"
 import CreateTeacher from "./component/Admin/CreateTeacher";
 import CreateStudent from "./component/Admin/Student/CreateStudent";
+import ViewDetails from "./component/Admin/ViewDetails";
+import ViewOneClass from "./component/Admin/ViewOneClass";
+import OneStudent from "./component/Admin/OneStudent";
+import DeleteStudent from "./component/Admin/DeleteStudent";
+// import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
     <div>
@@ -25,10 +30,14 @@ function App() {
           <Route path="/admin/dashboard" element={ <AdminDashBoard />} />
           <Route path="/admin/dashboard/create/teacher" element={<CreateTeacher />} />
           <Route path="/admin/dashboard/create/student" element={<CreateStudent />} /> 
+          <Route path="/admin/dashboard/view/details/:category" element={<ViewDetails/>} />
+          {/* <Route path="/admin/dashboard/view/all/details/in/student" element={<ViewAllStudent />} /> */}
+          <Route path="/admin/dashboard/view/details/oneclass/:standard/:section" element={ <ViewOneClass />} />
+          <Route path="/admin/dashboard/view/details/oneStudent/:studentId" element={ <OneStudent/>} />
+          <Route path="/admin/dashboard/view/details/oneStudent/delete/by/studentid/:studentId" element={<DeleteStudent/>} />
         </Routes>
       </BrowserRouter>
     </div>
   );
 }
-
 export default App;

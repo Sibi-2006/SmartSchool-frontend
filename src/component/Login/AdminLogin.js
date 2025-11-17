@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 export default function AdminLogin() {
-  const [admin, setAdmin] = useState({ adminId: "", password: "" });
+  const [admin, setAdmin] = useState({ loginId: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -12,7 +12,7 @@ export default function AdminLogin() {
 
   const isValid = () => {
     const tempError = {};
-    if (!admin.adminId.trim()) tempError.adminId = "Enter Admin ID";
+    if (!admin.loginId.trim()) tempError.loginId = "Enter Admin ID";
     if (!admin.password.trim()) tempError.password = "Enter Password";
     setErrors(tempError);
     return Object.keys(tempError).length === 0;
@@ -59,11 +59,11 @@ export default function AdminLogin() {
             id="id"
             type="text"
             placeholder="Enter Admin ID"
-            name="adminId"
+            name="loginId"
             onChange={handleChanges}
             className="form-input w-full border p-2 rounded"
           />
-          {errors.adminId && <div className="text-red-500 text-sm mt-1">{errors.adminId}</div>}
+          {errors.loginId && <div className="text-red-500 text-sm mt-1">{errors.loginId}</div>}
         </div>
 
         {/* Password */}

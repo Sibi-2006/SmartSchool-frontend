@@ -12,3 +12,4 @@ export function GlobalVariableProvider({ children }) {
     </GlobalVariableContext.Provider>
   );
 }
+//

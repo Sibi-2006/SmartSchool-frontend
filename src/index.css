@@ -42,3 +42,7 @@ body{
 .form-btn{
     @apply bg-primary hover:bg-secondary text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
 }
+
+.adminBox{
+    @apply flex items-center justify-center  flex-col bg-light shadow-md rounded-xl py-3 px-5 border-s-4 border-primary m-5 overflow-y-auto;
+}
