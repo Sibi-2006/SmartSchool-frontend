@@ -48,7 +48,13 @@ export default function OneStudent() {
     );
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-5">
+    <div className="min-h-screen bg-gray-100 py-20 px-5">
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-5 px-5 py-2 rounded-lg bg-primary text-white font-semibold shadow-md hover:shadow-lg transition"
+      >
+        ⬅ Back
+      </button>
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-8">
         <h1 className="text-3xl font-bold text-blue-700 text-center mb-6">
           Student Details

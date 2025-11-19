@@ -37,6 +37,12 @@ const { baseUrl } = useContext(GlobalVariableContext);
 
   return (
     <div className="py-20 px-10">
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-5 px-5 py-2 rounded-lg bg-primary text-white font-semibold shadow-md hover:shadow-lg transition"
+      >
+        ⬅ Back
+      </button>
       <h1 className="text-3xl font-bold mb-6 text-blue-600">
         Standard {standard} - Section {section}
       </h1>

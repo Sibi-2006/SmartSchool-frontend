@@ -115,7 +115,7 @@ const validateStep = () => {
         AssignedClass :"",
         Salary:""
     })
-
+    setSteps(1)
 
   } catch (err) {
     console.log(err.response?.data || err.message);

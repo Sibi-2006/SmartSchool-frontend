@@ -48,7 +48,6 @@ export default function AdminDashboard() {
     fetchCountAdmin();
   },[baseUrl,token,navigate])
 
-
   if (!admin) return <p className="text-center mt-10">Loading...</p>;
 
   return (

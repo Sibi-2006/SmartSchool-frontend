@@ -13,6 +13,8 @@ import ViewOneClass from "./component/Admin/ViewOneClass";
 import OneStudent from "./component/Admin/OneStudent";
 import DeleteStudent from "./component/Admin/DeleteStudent";
 import EditStudent from "./component/Admin/Student/EditStudent";
+import OneTeacher from "./component/Admin/OneTeacher";
+import DeleteTeacher from "./component/Admin/Teacher/DeleteTeacher";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
@@ -37,6 +39,10 @@ function App() {
           <Route path="/admin/dashboard/view/details/oneStudent/:studentId" element={ <OneStudent/>} />
           <Route path="/admin/dashboard/view/details/oneStudent/delete/by/studentid/:studentId" element={<DeleteStudent/>} />
           <Route path="/admin/dashboard/view/details/oneStudent/edit/by/studentid/:studentId" element={<EditStudent/>} />
+          {/* teachers */}
+          <Route path="/admin/dashboard/view/details/oneteacher/:teacherId" element={ <OneTeacher />} />
+          <Route path="/admin/dashboard/view/details/oneteacher/delete/by/studentid/:teacherId" element={ <DeleteTeacher />} />
+
         </Routes>
       </BrowserRouter>
     </div>

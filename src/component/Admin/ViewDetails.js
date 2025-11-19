@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { GlobalVariableContext } from "../../Context/GlobalVariable"
 import axios from 'axios';
 import ViewAllStudent from './ViewAllStudent';
+import ViewTeachersDetails from "./ViweTeachersDetails"
 export default function ViewDetails() {
     const { category } = useParams();
     const { baseUrl } = useContext(GlobalVariableContext);
@@ -19,7 +20,7 @@ export default function ViewDetails() {
                 const res = await axios.get(`${baseUrl}/adminlogin/get/allDetails/from/${category.toLowerCase()}`,{
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                setUsers(res.data.userData)
+                setUsers(res.data.userData);
             }catch(err){
                 console.log(err.message)
             }
@@ -29,7 +30,10 @@ export default function ViewDetails() {
   return (
     <div className='flex'>
       {
-        category.toLowerCase()==="student" && <ViewAllStudent users={users} />
+        category.toLowerCase()==="student" && <ViewAllStudent  />
+      }
+      {
+        category.toLowerCase()==="teacher" && <ViewTeachersDetails users={users} />
       }
     </div>
   )
