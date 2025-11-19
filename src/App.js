@@ -12,6 +12,7 @@ import ViewDetails from "./component/Admin/ViewDetails";
 import ViewOneClass from "./component/Admin/ViewOneClass";
 import OneStudent from "./component/Admin/OneStudent";
 import DeleteStudent from "./component/Admin/DeleteStudent";
+import EditStudent from "./component/Admin/Student/EditStudent";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/admin/dashboard/view/details/oneclass/:standard/:section" element={ <ViewOneClass />} />
           <Route path="/admin/dashboard/view/details/oneStudent/:studentId" element={ <OneStudent/>} />
           <Route path="/admin/dashboard/view/details/oneStudent/delete/by/studentid/:studentId" element={<DeleteStudent/>} />
+          <Route path="/admin/dashboard/view/details/oneStudent/edit/by/studentid/:studentId" element={<EditStudent/>} />
         </Routes>
       </BrowserRouter>
     </div>

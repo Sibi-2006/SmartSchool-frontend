@@ -6,6 +6,10 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const baseUrl = "/admin/dashboard/create";
+    const handleLogout = () => {
+      localStorage.removeItem("adminToken");
+       navigate("/login/admin");
+   };
   return (
     <>
       {/* MOBILE TOP NAV */}
@@ -29,6 +33,10 @@ export default function NavBar() {
         <nav className="flex flex-col items-center justify-around gap-4 h-full p-4 text-light font-bold text-xl">
           <button
            className="nav-btn"
+          onClick={()=>navigate("/admin/dashboard")}
+          >Dash Board</button>
+          <button
+           className="nav-btn"
           
           >Create Admin's</button>
           <button
@@ -38,6 +46,11 @@ export default function NavBar() {
           <button className="nav-btn"
           onClick={()=>navigate(`${baseUrl}/student`)}
           >Create Student's</button>
+
+          <button
+           className="nav-btn"
+          onClick={handleLogout}
+          >Log-Out</button>
         </nav>
       </div>
     </>

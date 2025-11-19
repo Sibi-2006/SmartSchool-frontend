@@ -21,6 +21,9 @@ export default function AcademicDetails({student, setStudent, handleNextBtn, err
             <option value="B">B</option>
             <option value="C">C</option>
         </select>
+        {errors.section && (
+            <p className="text-red-500 text-sm">{errors.section}</p>
+            )}
 
          <label className="text-primary font-semibold">RollNumber</label>
         <input type="text" className='form-input mb-4' name='rollNumber' value={student.rollNumber} onChange={e=>handleChanges(e)}/>

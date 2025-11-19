@@ -122,7 +122,9 @@ export default function OneStudent() {
             <button className=" bg-red-500 text-light rounded-lg py-2 px-3 hover:bg-red-400 font-bold text-2xl"
             onClick={()=>navigate(`/admin/dashboard/view/details/oneStudent/delete/by/studentid/${student.studentId}`)}
             >Delete</button>
-            <button className="bg-green-500 text-light rounded-lg py-2 px-3 hover:bg-green-400 font-bold text-2xl" >Edit</button>
+            <button
+              onClick={()=>navigate(`/admin/dashboard/view/details/oneStudent/edit/by/studentid/${student.studentId}`)}
+            className="bg-green-500 text-light rounded-lg py-2 px-3 hover:bg-green-400 font-bold text-2xl" >Edit</button>
         </div>
       </div>
     </div>

@@ -47,10 +47,7 @@ export default function AdminDashboard() {
     }
     fetchCountAdmin();
   },[baseUrl,token,navigate])
-  // const handleLogout = () => {
-  //   localStorage.removeItem("adminToken");
-  //   navigate("/login/admin");
-  // };
+
 
   if (!admin) return <p className="text-center mt-10">Loading...</p>;
 

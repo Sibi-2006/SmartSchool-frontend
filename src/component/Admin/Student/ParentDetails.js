@@ -126,7 +126,7 @@ export default function ParentDetails({
           Previous
         </button>
         <button className="form-btn" onClick={handleNextBtn}>
-          Submit
+          Next
         </button>
       </div>
 
