@@ -38,6 +38,7 @@ export default function AdminLogin() {
       }, 1500);
     } catch (err) {
       setMessage(err.response?.data?.message || "Server error");
+      console.log(err)
     }
     setLoading(false);
   };

@@ -96,6 +96,7 @@ export default function OneTeacher() {
             onClick={()=>navigate(`/admin/dashboard/view/details/oneteacher/delete/by/studentid/${teacher.teacherId}`)}
             >Delete</button>
             <button
+            onClick={()=>navigate(`/admin/dashboard/view/details/oneteacher/edit/by/studentid/${teacher.teacherId}`)}
             className="bg-green-500 text-light rounded-lg py-2 px-3 hover:bg-green-400 font-bold text-2xl w-1/2" >Edit</button>
         </div>
 

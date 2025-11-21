@@ -4,6 +4,7 @@ import { GlobalVariableContext } from "../../Context/GlobalVariable"
 import axios from 'axios';
 import ViewAllStudent from './ViewAllStudent';
 import ViewTeachersDetails from "./ViweTeachersDetails"
+import ViewAdmins from './ViewAdmins';
 export default function ViewDetails() {
     const { category } = useParams();
     const { baseUrl } = useContext(GlobalVariableContext);
@@ -34,6 +35,9 @@ export default function ViewDetails() {
       }
       {
         category.toLowerCase()==="teacher" && <ViewTeachersDetails users={users} />
+      }
+      {
+        category.toLowerCase()==="admin" && <ViewAdmins users={users} />
       }
     </div>
   )

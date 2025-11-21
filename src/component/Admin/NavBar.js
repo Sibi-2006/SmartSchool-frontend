@@ -37,7 +37,7 @@ export default function NavBar() {
           >Dash Board</button>
           <button
            className="nav-btn"
-          
+          onClick={()=>navigate(`${baseUrl}/admin`)}
           >Create Admin's</button>
           <button
            className="nav-btn"

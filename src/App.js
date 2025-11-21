@@ -15,6 +15,9 @@ import DeleteStudent from "./component/Admin/DeleteStudent";
 import EditStudent from "./component/Admin/Student/EditStudent";
 import OneTeacher from "./component/Admin/OneTeacher";
 import DeleteTeacher from "./component/Admin/Teacher/DeleteTeacher";
+import EditTeacher from "./component/Admin/Teacher/EditTeacher";
+import CreateAdmin from "./component/Admin/CreateAdmin";
+import DashBoard from "./component/Teacher/DashBoard";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
@@ -33,6 +36,7 @@ function App() {
           <Route path="/admin/dashboard" element={ <AdminDashBoard />} />
           <Route path="/admin/dashboard/create/teacher" element={<CreateTeacher />} />
           <Route path="/admin/dashboard/create/student" element={<CreateStudent />} /> 
+          <Route path="/admin/dashboard/create/admin" element={<CreateAdmin />} /> 
           <Route path="/admin/dashboard/view/details/:category" element={<ViewDetails/>} />
           {/* <Route path="/admin/dashboard/view/all/details/in/student" element={<ViewAllStudent />} /> */}
           <Route path="/admin/dashboard/view/details/oneclass/:standard/:section" element={ <ViewOneClass />} />
@@ -42,7 +46,9 @@ function App() {
           {/* teachers */}
           <Route path="/admin/dashboard/view/details/oneteacher/:teacherId" element={ <OneTeacher />} />
           <Route path="/admin/dashboard/view/details/oneteacher/delete/by/studentid/:teacherId" element={ <DeleteTeacher />} />
-
+          <Route path="/admin/dashboard/view/details/oneteacher/edit/by/studentid/:teacherId" element={ <EditTeacher />} />
+          {/* teacher  */}
+          <Route path="/teacher/dashboard" element={ <DashBoard />} />
         </Routes>
       </BrowserRouter>
     </div>
