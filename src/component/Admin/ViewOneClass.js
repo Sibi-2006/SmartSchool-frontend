@@ -2,18 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { GlobalVariableContext } from "../../Context/GlobalVariable"
+import { getTeacherToken } from "../../Storage";
 export default function ViewOneClass() {
-  const { standard, section } = useParams();
+  const { standard, section ,category} = useParams();
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
 const { baseUrl } = useContext(GlobalVariableContext);
-    const token = localStorage.getItem("adminToken");
+    const token = category==="admin"?localStorage.getItem("adminToken"):getTeacherToken();
     const navigate = useNavigate();
   useEffect(() => {
     const fetchClass = async () => {
       try {
         if (!token) {
-                navigate("/login/admin");
+                navigate(`/login/${category}`);
                 return;
             }
         const res = await axios.get(
@@ -61,9 +62,18 @@ const { baseUrl } = useContext(GlobalVariableContext);
               <p className="text-gray-700"><strong>Roll:</strong> {stu.rollNumber}</p>
               <p className="text-gray-700"><strong>Email:</strong> {stu.email}</p>
               <p className="text-gray-700"><strong>Phone:</strong> {stu.phone}</p>
-              <button className="main-btn"
-              onClick={()=>navigate(`/admin/dashboard/view/details/oneStudent/${stu.studentId}`)}
-              >Full detail about {stu.fullName} </button>
+              {
+                category==="admin"?(
+                    <button className="main-btn"
+                      onClick={()=>navigate(`/admin/dashboard/view/details/oneStudent/${stu.studentId}/admin`)}
+                      >Full detail about {stu.fullName} </button>
+                ):(
+                      <button className="main-btn"
+                  onClick={()=>navigate(`/teacher/view/details/oneStudent/${stu.studentId}/teacher`)}
+                  >Full detail about {stu.fullName} </button>
+                )
+              }
+              
             </div>
           ))}
         </div>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import NavBar from "./NavBar";
+import Loading from "../Loading";
 export default function AdminDashboard() {
   const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
@@ -48,12 +49,16 @@ export default function AdminDashboard() {
     fetchCountAdmin();
   },[baseUrl,token,navigate])
 
-  if (!admin) return <p className="text-center mt-10">Loading...</p>;
 
   return (
     <div className="p-8">
      <NavBar/>
      <div className=" w-full md:w-3/4 md:fixed right-0 flex items-center justify-center h-screen ">
+     {
+      !admin&&(
+        <Loading/>
+      )
+     }
       <div className="flex items-center justify-center flex-col gap-4 overflow-y-auto ">
           <div className="adminBox">
               <h1 className="form-title">ADMIN</h1>

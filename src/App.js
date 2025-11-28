@@ -18,6 +18,9 @@ import DeleteTeacher from "./component/Admin/Teacher/DeleteTeacher";
 import EditTeacher from "./component/Admin/Teacher/EditTeacher";
 import CreateAdmin from "./component/Admin/CreateAdmin";
 import DashBoard from "./component/Teacher/DashBoard";
+import Attendance from "./component/Teacher/Attendance";
+import AddMarkes from "./component/Teacher/AddMarkes";
+import TeacherProfile from "./component/Teacher/TeacherProfile";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
@@ -39,8 +42,8 @@ function App() {
           <Route path="/admin/dashboard/create/admin" element={<CreateAdmin />} /> 
           <Route path="/admin/dashboard/view/details/:category" element={<ViewDetails/>} />
           {/* <Route path="/admin/dashboard/view/all/details/in/student" element={<ViewAllStudent />} /> */}
-          <Route path="/admin/dashboard/view/details/oneclass/:standard/:section" element={ <ViewOneClass />} />
-          <Route path="/admin/dashboard/view/details/oneStudent/:studentId" element={ <OneStudent/>} />
+          <Route path="/admin/dashboard/view/details/oneclass/:standard/:section/:category" element={ <ViewOneClass />} />
+          <Route path="/admin/dashboard/view/details/oneStudent/:studentId/:category" element={ <OneStudent/>} />
           <Route path="/admin/dashboard/view/details/oneStudent/delete/by/studentid/:studentId" element={<DeleteStudent/>} />
           <Route path="/admin/dashboard/view/details/oneStudent/edit/by/studentid/:studentId" element={<EditStudent/>} />
           {/* teachers */}
@@ -48,7 +51,12 @@ function App() {
           <Route path="/admin/dashboard/view/details/oneteacher/delete/by/studentid/:teacherId" element={ <DeleteTeacher />} />
           <Route path="/admin/dashboard/view/details/oneteacher/edit/by/studentid/:teacherId" element={ <EditTeacher />} />
           {/* teacher  */}
-          <Route path="/teacher/dashboard" element={ <DashBoard />} />
+          <Route path="/teacher/:from" element={ <DashBoard />} />
+          <Route path="/teacher/view/class/:standard/:section/:category" element={<ViewOneClass/> } />
+          <Route path="/teacher/view/details/oneStudent/:studentId/:category" element={ <OneStudent/>} />
+          <Route path="/teacher/view/class/mark-attendance/:standard/:section/:teacherId" element={<Attendance/> } />
+          <Route path="/teacher/view/class/add-marks/:standard/:section/:teacherId" element={<AddMarkes/> } />
+          <Route path="/teacher/profile/:teacherId" element={<TeacherProfile/>} />
         </Routes>
       </BrowserRouter>
     </div>

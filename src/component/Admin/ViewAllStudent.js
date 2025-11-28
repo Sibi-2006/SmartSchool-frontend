@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { GlobalVariableContext } from "../../Context/GlobalVariable"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Loading';
 export default function ViewAllStudent() {
     const [classes , setClasses ] = useState([]);
     const { baseUrl } = useContext(GlobalVariableContext);
     const token = localStorage.getItem("adminToken");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [loading , setLoading ] = useState(true)
     useEffect(()=>{
         const fetchClassData = async ()=>{
             if (!token) {
@@ -14,19 +16,26 @@ export default function ViewAllStudent() {
                 return;
             }
             try{
+                setLoading(true)
                 const res = await axios.get(`${baseUrl}/adminlogin/class-stats`,{
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setClasses(res.data)
             }catch(err){
                 console.log(err.message)
+            }finally{
+                setLoading(false)
             }
         }
         fetchClassData()
-    },[baseUrl,token,navigate])
+    },[baseUrl,token,navigate]);
      return (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-32 px-10 w-full'>
-            
+            {
+                loading&&(
+                    <Loading/>
+                )
+            }
             {
             classes.map((cls) => (
                 <div 
@@ -56,7 +65,7 @@ export default function ViewAllStudent() {
 
                         <button
                         className='mt-4 w-full bg-primary text-white py-2 rounded-xl hover:bg-primary/90 transition-all duration-300 font-semibold'
-                        onClick={()=>navigate(`/admin/dashboard/view/details/oneclass/${cls._id.standard}/${cls._id.section}`)}
+                        onClick={()=>navigate(`/admin/dashboard/view/details/oneclass/${cls._id.standard}/${cls._id.section}/admin`)}
                         >
                             View Class
                         </button>

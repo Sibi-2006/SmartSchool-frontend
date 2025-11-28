@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import axios from "axios";
+import Loading from "../Loading";
 
 export default function OneTeacher() {
   const { teacherId } = useParams();
@@ -35,10 +36,6 @@ export default function OneTeacher() {
     fetchTeacher();
   }, [baseUrl, token, navigate, teacherId]);
 
-  if (loading)
-    return (
-      <div className="text-center py-20 text-xl font-semibold">Loading...</div>
-    );
 
   if (!teacher)
     return (
@@ -63,7 +60,11 @@ export default function OneTeacher() {
       </h1>
 
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
-
+        {
+          loading&&(
+            <Loading/>
+          )
+        }
         {/* TOP SECTION */}
         <div className="flex flex-col items-center gap-3 text-center mb-10">
          

@@ -46,3 +46,12 @@ body{
 .adminBox{
     @apply flex items-center justify-center  flex-col bg-light shadow-md rounded-xl py-3 px-5 border-s-4 border-primary m-5 overflow-y-auto;
 }
+@keyframes fadeScale {
+  0% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0.3; transform: scale(1); }
+}
+
+.animate-fadeScale {
+  animation: fadeScale 1.5s infinite ease-in-out;
+}

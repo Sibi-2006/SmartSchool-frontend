@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import axios from "axios";
+import { getTeacherToken } from "../../Storage";
+import Loading from "../Loading";
 
 export default function OneStudent() {
-  const { studentId } = useParams();
+  const { studentId ,category } = useParams();
   const { baseUrl } = useContext(GlobalVariableContext);
   const navigate = useNavigate();
-  const token = localStorage.getItem("adminToken");
+  const token = category ==="admin"?localStorage.getItem("adminToken"):getTeacherToken();
 
   const [student, setStudent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ export default function OneStudent() {
   useEffect(() => {
     const fetchStudent = async () => {
       if (!token) {
-        navigate("/login/admin");
+        navigate(`/login/${category}`);
         return;
       }
 
@@ -35,10 +37,6 @@ export default function OneStudent() {
     };
     fetchStudent();
   }, [baseUrl, token, navigate, studentId]);
-  if (loading)
-    return (
-      <div className="text-center py-20 text-xl font-semibold">Loading...</div>
-    );
 
   if (!student)
     return (
@@ -56,6 +54,11 @@ export default function OneStudent() {
         ⬅ Back
       </button>
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-8">
+        {
+          loading&&(
+            <Loading/>
+          )
+        }
         <h1 className="text-3xl font-bold text-blue-700 text-center mb-6">
           Student Details
         </h1>
@@ -124,14 +127,19 @@ export default function OneStudent() {
             <Detail label="Balance" value={student.balance} />
           </div>
         </section>
-        <div className=" flex flex-row gap-3 mb-20">
-            <button className=" bg-red-500 text-light rounded-lg py-2 px-3 hover:bg-red-400 font-bold text-2xl"
+        {
+          category==="admin" &&(
+              <div className=" flex flex-row gap-3 mb-20">
+            <button className=" bg-red-500 text-light rounded-lg py-2 px-3 hover:bg-red-400 font-bold text-2xl w-1/2"
             onClick={()=>navigate(`/admin/dashboard/view/details/oneStudent/delete/by/studentid/${student.studentId}`)}
             >Delete</button>
             <button
               onClick={()=>navigate(`/admin/dashboard/view/details/oneStudent/edit/by/studentid/${student.studentId}`)}
-            className="bg-green-500 text-light rounded-lg py-2 px-3 hover:bg-green-400 font-bold text-2xl" >Edit</button>
+            className="bg-green-500 text-light rounded-lg py-2 px-3 hover:bg-green-400 font-bold text-2xl w-1/2" >Edit</button>
         </div>
+          )
+        }
+        
       </div>
     </div>
   );
