@@ -36,7 +36,7 @@ export default function OneStudent() {
       }
     };
     fetchStudent();
-  }, [baseUrl, token, navigate, studentId]);
+  }, [baseUrl, token, navigate, studentId,category]);
 
   if (!student)
     return (

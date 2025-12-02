@@ -32,7 +32,7 @@ const { baseUrl } = useContext(GlobalVariableContext);
     };
 
     fetchClass();
-  }, [standard, section,baseUrl,token,navigate]);
+  }, [standard, section,baseUrl,token,navigate,category]);
 
   if (loading) return <h2 className="text-center mt-10">Loading...</h2>;
 

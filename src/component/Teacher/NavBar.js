@@ -13,7 +13,7 @@ export default function NavBar() {
     const navigate = useNavigate();
     const handleLogout = () => {
         logoutTeacher();
-       navigate("/login/teacher");
+       navigate("/login/teachers");
    };
 
     useEffect(() => {
@@ -36,12 +36,11 @@ export default function NavBar() {
 
         fetchTeacher();
     }, [baseUrl, token, navigate]);
-    console.log("nav : ",teacherId)
   return (
     <>
       {/* MOBILE TOP NAV */}
       <nav className="fixed top-0 left-0 w-full bg-primary text-light p-4 flex justify-between items-center md:hidden z-50">
-        <h1 className="text-xl font-bold">Admin-dashboard</h1>
+        <h1 className="text-xl font-bold">Teacher-dashboard</h1>
 
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}

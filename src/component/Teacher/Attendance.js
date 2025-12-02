@@ -102,7 +102,6 @@ export default function Attendance() {
         fetchTeacher();
     }, [baseUrl, token, navigate,teacherId]);
 
-
     // Submit attendance
     const submitAttendance = async () => {
         try {

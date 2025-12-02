@@ -36,7 +36,6 @@ export default function TeacherProfile() {
 
         fetchTeacher();
     }, [baseUrl, token, navigate,teacherId]);
-    console.log(teacher)
   return (
     <div>
       <NavBar />
@@ -57,6 +56,7 @@ export default function TeacherProfile() {
                         <Info label="DOB" value={teacher.dob} />
                         <Info label="Address" value={teacher.address} />
 
+                        <Info label="Teacher-id" value={teacher.teacherId} />
                         <Info label="Designation" value={teacher.designation} />
                         <Info label="Qualification" value={teacher.qualification} />
                         <Info label="Experience" value={teacher.experience + " Years"} />
@@ -66,6 +66,10 @@ export default function TeacherProfile() {
                         <Info label="Salary" value={"₹ " + teacher.Salary} />
                     </div>
                 </div>
+                <button
+                    className='bg-green-400 text-dark text-2xl font-bold py-3 px-5 rounded-xl hover:bg-green-200 '
+                    onClick={()=>navigate(`/teacher/profile/${teacherId}/edit`)}
+                >Edit Profile</button>
             </div>
         </div>
     </div>

@@ -49,7 +49,6 @@ export default function AdminDashboard() {
     fetchCountAdmin();
   },[baseUrl,token,navigate])
 
-
   return (
     <div className="p-8">
      <NavBar/>

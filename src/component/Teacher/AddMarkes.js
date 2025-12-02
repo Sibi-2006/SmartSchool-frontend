@@ -1,215 +1,289 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import Loading from '../Loading';
-import { getTeacherToken } from '../../Storage';
+import { getTeacherToken } from "../../Storage";
+import Loading from "../Loading";
+import axios from "axios";
+
+// Toast
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Attendance() {
-    const { standard, section, teacherId } = useParams();
-    const [students, setStudents] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const { baseUrl } = useContext(GlobalVariableContext);
-    const [attendance, setAttendance] = useState({});
-    const [teacher, setTeacher] = useState({});
-    const token = getTeacherToken();
+export default function AddMarkes() {
+  const { standard, section, teacherId } = useParams();
+  const [students, setStudents] = useState([]);
+  const [boys, setBoys] = useState([]);
+  const [girls, setGirls] = useState([]);
 
-    const navigate = useNavigate();
+  const [teacher, setTeacher] = useState({});
+  const { baseUrl } = useContext(GlobalVariableContext);
+  const token = getTeacherToken();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
-    const [boys, setBoys] = useState([]);
-    const [girls, setGirls] = useState([]);
+  // Inputs for each student
+  const [inputs, setInputs] = useState({});
 
-    // =============================
-    // Fetch Class Students
-    // =============================
-    useEffect(() => {
-        const fetchClass = async () => {
-            try {
-                if (!token) {
-                    navigate(`/login/teacher`);
-                    return;
-                }
+  // fetch teacher
+  useEffect(() => {
+    const fecthTeacher = async () => {
+      if (!token) navigate("/login/teachers");
 
-                const res = await axios.get(
-                    `${baseUrl}/create/class/${standard}/${section}`,
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    }
-                );
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          `${baseUrl}/create/getOneTeacher/by-Id/${teacherId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setTeacher(res.data.teacher);
+      } catch (err) {
+        toast.error("Failed to load teacher data!");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fecthTeacher();
+  }, [baseUrl, teacherId, navigate, token]);
 
-                setStudents(res.data || []);
-                setLoading(false);
-            } catch (err) {
-                console.error(err);
-                toast.error("Error fetching students!");
-                setLoading(false);
-            }
-        };
-
-        fetchClass();
-    }, [standard, section, baseUrl, token, navigate]);
-
-
-    // Sort + Split Boys/Girls
-    useEffect(() => {
-        if (!students || students.length === 0) {
-            setBoys([]);
-            setGirls([]);
-            return;
+  // fetch class students
+  useEffect(() => {
+    const fetchClass = async () => {
+      try {
+        if (!token) {
+          navigate(`/login/teacher`);
+          return;
         }
 
-        const sorted = [...students].sort((a, b) =>
-            a.fullName.localeCompare(b.fullName)
+        const res = await axios.get(
+          `${baseUrl}/create/class/${standard}/${section}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
 
-        const currentBoys = sorted.filter(
-            (std) => std.gender?.toLowerCase() === "male"
+        const allStudents = res.data || [];
+
+        // Sort A → Z
+        allStudents.sort((a, b) =>
+          a.fullName.localeCompare(b.fullName)
         );
-        const currentGirls = sorted.filter(
-            (std) => std.gender?.toLowerCase() === "female"
-        );
 
-        setBoys(currentBoys);
-        setGirls(currentGirls);
-    }, [students]);
+        // Separate boys & girls
+        setBoys(allStudents.filter((s) => s.gender === "male"));
+        setGirls(allStudents.filter((s) => s.gender === "female"));
 
-
-    // Fetch Teacher
-    useEffect(() => {
-        const fetchTeacher = async () => {
-            if (!token) {
-                navigate("/login/teachers");
-                return;
-            }
-
-            try {
-                setLoading(true);
-                const res = await axios.get(`${baseUrl}/create/getOneTeacher/by-Id/${teacherId}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-
-                setTeacher(res.data.teacher);
-            } catch (err) {
-                console.log(err.message);
-                toast.error("Error fetching teacher data!");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchTeacher();
-    }, [baseUrl, token, navigate]);
-
-
-    // Submit attendance
-    const submitAttendance = async () => {
-        try {
-            const payload = {
-                date: new Date().toISOString().slice(0, 10),
-                standard,
-                section,
-                subject: teacher.department,
-                markedBy: teacher._id,
-                students: students.map((std) => ({
-                    studentId: std._id,
-                    name: std.fullName,
-                    rollNumber: std.rollNumber,
-                    status: attendance[std._id] || "absent",
-                })),
-            };
-
-            await axios.post(
-                `${baseUrl}/attendance/mark`,
-                payload,
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-
-            toast.success("Attendance Saved Successfully! 🎉");
-
-        } catch (err) {
-            console.error(err);
-            toast.error("Error marking attendance!");
-        }
+        setStudents(allStudents);
+        toast.success("Students loaded!");
+      } catch (err) {
+        toast.error("Failed to load students!");
+      } finally {
+        setLoading(false);
+      }
     };
 
+    fetchClass();
+  }, [standard, section, baseUrl, token, navigate]);
 
-    return (
-        <div className="py-20 px-10 overflow-y-auto">
+  // Handle input change per student
+  const handleChanges = (e, id) => {
+    setInputs({
+      ...inputs,
+      [id]: {
+        ...inputs[id],
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
 
-            {/* Toast Container */}
-            <ToastContainer position="top-center" autoClose={2000} />
+  // Submit marks
+  const addmark = async (id) => {
+    const data = inputs[id];
 
-            {loading && <Loading />}
+    if (!data || !data.mark || !data.exam) {
+      toast.error("Please fill exam & marks!");
+      return;
+    }
 
-            {!loading && (
-                <>
-                    <h1 className="text-xl font-bold mb-4">Attendance</h1>
+    try {
+      if (!token) {
+        navigate(`/login/teacher`);
+        return;
+      }
 
-                    {/* Boys */}
-                    <div className="mb-6">
-                        <h2 className="font-semibold text-blue-600 text-lg">
-                            Boys ({boys.length})
-                        </h2>
-                        <ul className="mt-2">
-                            {boys.map((boy) => (
-                                <li key={boy._id} className="border p-2 rounded mb-2 flex justify-between">
-                                    {boy.fullName}
+      await axios.post(
+        `${baseUrl}/add-mark/from/teacher/${id}`,
+        {
+          studentId: id,
+          standard,
+          section,
+          marks: data.mark,
+          examType: data.exam,
+          addedBy: teacher._id,
+          subject: teacher.department,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
-                                    <select
-                                        value={attendance[boy._id] || ""}
-                                        onChange={(e) =>
-                                            setAttendance({ ...attendance, [boy._id]: e.target.value })
-                                        }
-                                        className="border px-2 py-1 rounded"
-                                    >
-                                        <option value="">Select</option>
-                                        <option value="present">Present</option>
-                                        <option value="absent">Absent</option>
-                                    </select>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+      toast.success("Marks added!");
 
-                    {/* Girls */}
-                    <div>
-                        <h2 className="font-semibold text-pink-600 text-lg">
-                            Girls ({girls.length})
-                        </h2>
-                        <ul className="mt-2">
-                            {girls.map((girl) => (
-                                <li key={girl._id} className="border p-2 rounded mb-2 flex justify-between">
-                                    {girl.fullName}
+      // Clear input
+      setInputs((prev) => ({
+        ...prev,
+        [id]: { exam: "", mark: "" },
+      }));
+    } catch (err) {
+      toast.error("Error adding marks!");
+    }
+  };
 
-                                    <select
-                                        value={attendance[girl._id] || ""}
-                                        onChange={(e) =>
-                                            setAttendance({ ...attendance, [girl._id]: e.target.value })
-                                        }
-                                        className="border px-2 py-1 rounded"
-                                    >
-                                        <option value="">Select</option>
-                                        <option value="present">Present</option>
-                                        <option value="absent">Absent</option>
-                                    </select>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+  return (
+    <div className="py-24 w-full flex items-center justify-center flex-col bg-gray-50 min-h-screen">
+      <ToastContainer position="top-center" />
 
-                    <button
-                        onClick={submitAttendance}
-                        className="bg-green-600 text-white px-4 py-2 rounded mt-4"
-                    >
-                        Submit Attendance
-                    </button>
+      {loading && <Loading />}
 
-                </>
+      {!loading && (
+        <>
+          <h1 className="text-center text-3xl font-bold text-gray-800 mb-6">
+            Add Marks —{" "}
+            <span className="text-primary font-extrabold">
+              {standard} "{section}"
+            </span>
+          </h1>
+
+          {/* ------------------------ BOYS ------------------------ */}
+          <h2 className="text-2xl font-bold text-blue-700 mb-3">👦 Boys</h2>
+
+          <ul className="flex flex-col w-full md:w-3/4 gap-6">
+            {boys.length === 0 && (
+              <p className="text-gray-500">No boys found.</p>
             )}
-        </div>
-    );
+
+            {boys.map((std) => (
+              <li
+                key={std._id}
+                className="w-full border bg-white rounded-xl shadow-md p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+              >
+                <div>
+                  <h1 className="text-lg font-semibold text-gray-700">
+                    Name:{" "}
+                    <span className="text-primary font-bold">
+                      {std.fullName}
+                    </span>
+                  </h1>
+                  <h2 className="text-md text-gray-600">
+                    Roll No:{" "}
+                    <span className="text-primary font-bold">
+                      {std.rollNumber}
+                    </span>
+                  </h2>
+                </div>
+
+                <div className="flex flex-col md:flex-row gap-4">
+                  <select
+                    name="exam"
+                    className="px-4 py-2 border rounded-lg bg-gray-100"
+                    value={inputs[std._id]?.exam || ""}
+                    onChange={(e) => handleChanges(e, std._id)}
+                  >
+                    <option value="">Select Exam</option>
+                    <option value="Unit Test 1">Unit Test 1</option>
+                    <option value="Unit Test 2">Unit Test 2</option>
+                    <option value="Midterm">Midterm</option>
+                    <option value="Final">Final</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Special">Special</option>
+                  </select>
+
+                  <input
+                    type="text"
+                    placeholder="Enter marks"
+                    name="mark"
+                    className="px-4 py-2 border rounded-lg bg-gray-100"
+                    value={inputs[std._id]?.mark || ""}
+                    onChange={(e) => handleChanges(e, std._id)}
+                  />
+                </div>
+
+                <button
+                  className="bg-primary text-white px-5 py-2 rounded-lg font-semibold"
+                  onClick={() => addmark(std._id)}
+                >
+                  Add
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          {/* ------------------------ GIRLS ------------------------ */}
+          <h2 className="text-2xl font-bold text-pink-700 mt-10 mb-3">👧 Girls</h2>
+
+          <ul className="flex flex-col w-full md:w-3/4 gap-6">
+            {girls.length === 0 && (
+              <p className="text-gray-500">No girls found.</p>
+            )}
+
+            {girls.map((std) => (
+              <li
+                key={std._id}
+                className="w-full border bg-white rounded-xl shadow-md p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+              >
+                <div>
+                  <h1 className="text-lg font-semibold text-gray-700">
+                    Name:{" "}
+                    <span className="text-primary font-bold">
+                      {std.fullName}
+                    </span>
+                  </h1>
+                  <h2 className="text-md text-gray-600">
+                    Roll No:{" "}
+                    <span className="text-primary font-bold">
+                      {std.rollNumber}
+                    </span>
+                  </h2>
+                </div>
+
+                <div className="flex flex-col md:flex-row gap-4">
+                  <select
+                    name="exam"
+                    className="px-4 py-2 border rounded-lg bg-gray-100"
+                    value={inputs[std._id]?.exam || ""}
+                    onChange={(e) => handleChanges(e, std._id)}
+                  >
+                    <option value="">Select Exam</option>
+                    <option value="Unit Test 1">Unit Test 1</option>
+                    <option value="Unit Test 2">Unit Test 2</option>
+                    <option value="Midterm">Midterm</option>
+                    <option value="Final">Final</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Special">Special</option>
+                  </select>
+
+                  <input
+                    type="text"
+                    placeholder="Enter marks"
+                    name="mark"
+                    className="px-4 py-2 border rounded-lg bg-gray-100"
+                    value={inputs[std._id]?.mark || ""}
+                    onChange={(e) => handleChanges(e, std._id)}
+                  />
+                </div>
+
+                <button
+                  className="bg-primary text-white px-5 py-2 rounded-lg font-semibold"
+                  onClick={() => addmark(std._id)}
+                >
+                  Add
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  );
 }

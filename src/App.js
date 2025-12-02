@@ -21,6 +21,12 @@ import DashBoard from "./component/Teacher/DashBoard";
 import Attendance from "./component/Teacher/Attendance";
 import AddMarkes from "./component/Teacher/AddMarkes";
 import TeacherProfile from "./component/Teacher/TeacherProfile";
+import EditProfile from "./component/Teacher/EditProfile";
+import StudentDashBoard from "./component/Student/StudentDashBoard";
+import StudentProfile from "./component/Student/StudentProfile";
+import MarkHome from "./component/Student/MarkHome";
+import Result from "./component/Student/Result";
+import StudentAttendance from "./component/Student/StudentAttendance";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
@@ -57,6 +63,13 @@ function App() {
           <Route path="/teacher/view/class/mark-attendance/:standard/:section/:teacherId" element={<Attendance/> } />
           <Route path="/teacher/view/class/add-marks/:standard/:section/:teacherId" element={<AddMarkes/> } />
           <Route path="/teacher/profile/:teacherId" element={<TeacherProfile/>} />
+          <Route path="/teacher/profile/:teacherId/edit" element={<EditProfile/>} />
+          {/* student */}
+          <Route path="/student/dashboard" element={<StudentDashBoard/>} />
+          <Route path="/student/profile/:id" element={<StudentProfile/>} />
+          <Route path="/student/mark-home/:id" element={<MarkHome/>} />
+          <Route path="/student/attandance/:id/:standard/:section" element={<StudentAttendance />} />
+          <Route path="/student/mark/:id/:examType" element={<Result/>} />
         </Routes>
       </BrowserRouter>
     </div>
