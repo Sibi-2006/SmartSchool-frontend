@@ -47,6 +47,10 @@ export default function NavBar() {
           onClick={()=>navigate(`${baseUrl}/student`)}
           >Create Student's</button>
 
+          <button className="nav-btn"
+          onClick={()=>navigate("/admin/dashboard/create/time-table")}
+          >Create TimeTable</button>
+
           <button
            className="nav-btn"
           onClick={handleLogout}

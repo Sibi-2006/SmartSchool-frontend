@@ -83,9 +83,20 @@ export default function AdminDashboard() {
                  onClick={()=>navigate(`${baseNavUrl}/student`)}
                  >View Student's details</button>
             </div>
+            
+             <div className="adminBox">
+              <h1 className="form-title">TimeTable</h1>
+              <button
+                 className="main-btn"
+                 onClick={()=>navigate(`${baseNavUrl}/time-table`)}
+                 >View all timeTable details</button>
+            </div>
+            
+          </div>
+
+          </div>
+           
           </div>
       </div>
-     </div>
-    </div>
   );
 }

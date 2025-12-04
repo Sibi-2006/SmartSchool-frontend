@@ -49,7 +49,9 @@ export default function StudentDashBoard() {
           <img className='h-28 w-32 md:h-52 md:w-56'  src={MARK} alt="mark" />
           <h1 className=' font-bold text-dark text-2xl text-center py-2'>Mark</h1>
         </div>
-        <div className=' bg-gray-200 shadow-md rounded-md hover:scale-105 transform duration-250  hover:cursor-pointer'>
+        <div className=' bg-gray-200 shadow-md rounded-md hover:scale-105 transform duration-250  hover:cursor-pointer'
+          onClick={()=>navigate(`/student/time-table/${student.standard}/${student.section}`)}
+        >
           <img className='h-28 w-32 md:h-52 md:w-56'  src={TIMETABLE} alt="time table" />
           <h1 className=' font-bold text-dark text-2xl text-center py-2'>Time table</h1>
         </div>

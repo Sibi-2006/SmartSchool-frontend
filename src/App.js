@@ -27,6 +27,11 @@ import StudentProfile from "./component/Student/StudentProfile";
 import MarkHome from "./component/Student/MarkHome";
 import Result from "./component/Student/Result";
 import StudentAttendance from "./component/Student/StudentAttendance";
+import TimeTableInStudent from "./component/Student/TimeTableInStudent";
+import CreateTimeTable from "./component/Admin/CreateTimeTable";
+import ViewAllTimeTable from "./component/Admin/TimeTable/ViewAllTimeTable";
+import OneClassTimeTable from "./component/Admin/TimeTable/OneClassTimeTable";
+import DeleteTimeTable from "./component/Admin/TimeTable/DeleteTimeTable";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
@@ -56,6 +61,11 @@ function App() {
           <Route path="/admin/dashboard/view/details/oneteacher/:teacherId" element={ <OneTeacher />} />
           <Route path="/admin/dashboard/view/details/oneteacher/delete/by/studentid/:teacherId" element={ <DeleteTeacher />} />
           <Route path="/admin/dashboard/view/details/oneteacher/edit/by/studentid/:teacherId" element={ <EditTeacher />} />
+          {/* time-table */}
+          <Route path="/admin/dashboard/create/time-table" element={<CreateTimeTable/>}/>
+          <Route path="/admin/dashboard/view/details/time-table" element={<ViewAllTimeTable/>} />
+          <Route path="/admin/view/oneclass/time-table/:standard/:section" element={<OneClassTimeTable/>} />
+          <Route path="/admin/delete/time-table/:id/:section/:standard" element={<DeleteTimeTable/>} />
           {/* teacher  */}
           <Route path="/teacher/:from" element={ <DashBoard />} />
           <Route path="/teacher/view/class/:standard/:section/:category" element={<ViewOneClass/> } />
@@ -70,6 +80,7 @@ function App() {
           <Route path="/student/mark-home/:id" element={<MarkHome/>} />
           <Route path="/student/attandance/:id/:standard/:section" element={<StudentAttendance />} />
           <Route path="/student/mark/:id/:examType" element={<Result/>} />
+          <Route path="/student/time-table/:standard/:section" element={<TimeTableInStudent/>}/>
         </Routes>
       </BrowserRouter>
     </div>
