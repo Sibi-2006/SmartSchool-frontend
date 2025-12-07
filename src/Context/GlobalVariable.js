@@ -3,7 +3,7 @@ import React, { createContext } from "react";
 export const GlobalVariableContext = createContext();
 
 export function GlobalVariableProvider({ children }) {
-  const baseUrl = "http://192.168.20.101:3500/api"
+  const baseUrl = "http://192.168.96.101:3500/api"
   const appName = "SmartSchool";
 
   return (

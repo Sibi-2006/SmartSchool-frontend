@@ -29,7 +29,6 @@ export default function OneClassTimeTable() {
         }
         fetchTimeTable();
     },[token,navigate,section,standard,baseUrl])
-console.log(timeTable)
   return (
     <div className=' pt-28 pb-10 '>
       <TimeTableStru

@@ -32,12 +32,17 @@ import CreateTimeTable from "./component/Admin/CreateTimeTable";
 import ViewAllTimeTable from "./component/Admin/TimeTable/ViewAllTimeTable";
 import OneClassTimeTable from "./component/Admin/TimeTable/OneClassTimeTable";
 import DeleteTimeTable from "./component/Admin/TimeTable/DeleteTimeTable";
+import EditTimeTable from "./component/Admin/TimeTable/EditTimeTable";
+import AmountDetails from "./component/Admin/AmountDetails";
+import CreateParent from "./component/Admin/Parent/CreateParent";
+import { Toaster } from "react-hot-toast";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
     <div>
       <BrowserRouter>
       <Header />
+      <Toaster position="top-center" reverseOrder={false} />
         <Routes>
           <Route path="/" element={<Home />} />
 
@@ -51,7 +56,9 @@ function App() {
           <Route path="/admin/dashboard/create/teacher" element={<CreateTeacher />} />
           <Route path="/admin/dashboard/create/student" element={<CreateStudent />} /> 
           <Route path="/admin/dashboard/create/admin" element={<CreateAdmin />} /> 
+          <Route path="/admin/dashboard/create/parent" element={<CreateParent/>} />
           <Route path="/admin/dashboard/view/details/:category" element={<ViewDetails/>} />
+          <Route path="/admin/amount/details" element={<AmountDetails/>} />
           {/* <Route path="/admin/dashboard/view/all/details/in/student" element={<ViewAllStudent />} /> */}
           <Route path="/admin/dashboard/view/details/oneclass/:standard/:section/:category" element={ <ViewOneClass />} />
           <Route path="/admin/dashboard/view/details/oneStudent/:studentId/:category" element={ <OneStudent/>} />
@@ -66,6 +73,8 @@ function App() {
           <Route path="/admin/dashboard/view/details/time-table" element={<ViewAllTimeTable/>} />
           <Route path="/admin/view/oneclass/time-table/:standard/:section" element={<OneClassTimeTable/>} />
           <Route path="/admin/delete/time-table/:id/:section/:standard" element={<DeleteTimeTable/>} />
+          <Route path="/admin/edit/time-table/:id/:section/:standard" element={<EditTimeTable/>} />
+
           {/* teacher  */}
           <Route path="/teacher/:from" element={ <DashBoard />} />
           <Route path="/teacher/view/class/:standard/:section/:category" element={<ViewOneClass/> } />

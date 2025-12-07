@@ -72,10 +72,6 @@ export default function NavBar() {
       Add Marks
     </button>
 
-    <button className="nav-btn">
-      View Time Table
-    </button>
-
     <button className="nav-btn" onClick={() => navigate(`/teacher/profile/${teacherId}`)}>
       Profile
     </button>

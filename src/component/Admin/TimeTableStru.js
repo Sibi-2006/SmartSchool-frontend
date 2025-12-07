@@ -56,6 +56,7 @@ export default function TimeTableStru({
                         onClick={()=>navigate(`/admin/delete/time-table/${timeTable._id}/${section}/${standard}`)}
                         >Delete</button>
                         <button
+                        onClick={()=>navigate(`/admin/edit/time-table/${timeTable._id}/${section}/${standard}`)}
                         className="bg-green-500 text-light rounded-lg py-2 px-3 hover:bg-green-400 font-bold text-2xl w-1/2" >Edit</button>
                     </div>
                 )

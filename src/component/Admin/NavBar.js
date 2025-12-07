@@ -30,7 +30,7 @@ export default function NavBar() {
           md:block
         `}
       >
-        <nav className="flex flex-col items-center justify-around gap-4 h-full p-4 text-light font-bold text-xl">
+        <nav className="flex flex-col items-center justify-center gap-4 h-full p-4 text-light font-bold text-xl">
           <button
            className="nav-btn"
           onClick={()=>navigate("/admin/dashboard")}
@@ -48,8 +48,15 @@ export default function NavBar() {
           >Create Student's</button>
 
           <button className="nav-btn"
+          onClick={()=>navigate(`${baseUrl}/parent`)}
+          >Create Parent's</button>
+
+          <button className="nav-btn"
           onClick={()=>navigate("/admin/dashboard/create/time-table")}
           >Create TimeTable</button>
+          <button className="nav-btn"
+          onClick={()=>navigate("/admin/amount/details")}
+          >Amount Details</button>
 
           <button
            className="nav-btn"
