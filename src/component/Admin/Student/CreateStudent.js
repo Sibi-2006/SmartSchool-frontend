@@ -8,6 +8,7 @@ import LoginDetails from "./LoginDetails";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { GlobalVariableContext } from "../../../Context/GlobalVariable";
+import toast from "react-hot-toast";
 
 export default function CreateStudent() {
   const emptyStudent = {
@@ -142,7 +143,8 @@ export default function CreateStudent() {
       setStudent(emptyStudent);
       setSteps(1);
     } catch (err) {
-      console.log(err.message);
+      const errorMsg = err.response?.data?.message || "Server error";
+      toast.error(errorMsg);
     }
   };
 

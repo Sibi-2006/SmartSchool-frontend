@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { GlobalVariableContext } from "../../../Context/GlobalVariable";
+import toast from "react-hot-toast";
 
 export default function EditTimeTable() {
   const { standard, section } = useParams();
@@ -50,8 +51,8 @@ export default function EditTimeTable() {
       );
       alert("Timetable updated successfully!");
     } catch (err) {
-      console.log(err);
-      alert("Update failed");
+      const errorMsg = err.response?.data?.message || "Server error";
+      toast.error(errorMsg);
     }
   };
 

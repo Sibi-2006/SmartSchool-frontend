@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getStudentToken } from '../../Storage';
+import { getStudentToken,getParentToken } from '../../Storage';
 import { GlobalVariableContext } from '../../Context/GlobalVariable';
 import axios from 'axios';
+import toast from "react-hot-toast";
 
 export default function Result() {
-    const { examType , id } = useParams();
+    const { examType , id ,from} = useParams();
     const [marks , setMarks] = useState([]);
-    const token = getStudentToken();
+    const token = from==="student"? getStudentToken() : getParentToken();
     const navigate = useNavigate();
     const { baseUrl } = useContext(GlobalVariableContext);
 
@@ -15,21 +16,22 @@ export default function Result() {
         const fetchMarks = async ()=>{
             try{
                 if(!token){
-                    navigate("/login.students");
+                    navigate(`/login/${from}`);
                     return;
                 }
 
-                const res = await axios.get(`${baseUrl}/student/marks/${id}/${examType}`,{
+                const res = await axios.get(`${baseUrl}/${from}/marks/${id}/${examType}`,{
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setMarks(res.data.marks);
             }catch(err){
-                console.log(err)
-            }
+      const errorMsg = err.response?.data?.message || "Server error";
+      toast.error(errorMsg);
+    }
         }
 
         fetchMarks();
-    })
+    },[baseUrl,navigate,token,from])
   return (
   <div className='p-4 max-w-3xl mx-auto flex items-center justify-center flex-col min-h-screen'>
     <h1 className='text-2xl font-semibold mb-4 text-center'>

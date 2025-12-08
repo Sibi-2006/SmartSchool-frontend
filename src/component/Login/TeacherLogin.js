@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import { setTeacherToken } from "../../Storage.js"
+import toast from "react-hot-toast";
+
 export default function TeacherLogin() {
   const [ teacher , setTeacher ] = useState({
     loginId:"",
@@ -40,7 +42,8 @@ export default function TeacherLogin() {
         }, 2000);
     }catch(err){
       setMessage("error on server")
-      console.log(err.message);
+      const errorMsg = err.response?.data?.message || "Server error";
+      toast.error(errorMsg);
     }
 
   };

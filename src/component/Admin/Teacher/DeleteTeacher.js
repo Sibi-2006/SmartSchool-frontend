@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { GlobalVariableContext } from "../../../Context/GlobalVariable";
+import toast from "react-hot-toast";
+
 export default function DeleteTeacher() {
     const { teacherId } = useParams();
   const [deleteId, setDeleteId] = useState("");
@@ -42,7 +44,8 @@ export default function DeleteTeacher() {
       }, 1500);
 
     } catch (err) {
-      console.log(err.message);
+      const errorMsg = err.response?.data?.message || "Server error";
+              toast.error(errorMsg);
       setMessage("Something went wrong");
     }
 

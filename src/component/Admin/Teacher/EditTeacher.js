@@ -6,6 +6,7 @@ import ProfessionalDetails from '../Teacher/ProfessionalDetails'
 import LoginCredentials from '../Teacher/LoginCredentials';
 
 import axios from "axios";
+import toast from "react-hot-toast";
 
 
 export default function EditTeacher() {
@@ -49,7 +50,8 @@ const isFromEditTeacher = true;
         );
         setTeacherData(res.data.teacher);
       } catch (err) {
-        console.log(err.message);
+        const errorMsg = err.response?.data?.message || "Server error";
+toast.error(errorMsg);
       } finally {
         setLoading(false);
       }

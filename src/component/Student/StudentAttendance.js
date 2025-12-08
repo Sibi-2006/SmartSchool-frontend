@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GlobalVariableContext } from '../../Context/GlobalVariable';
-import { getStudentToken } from '../../Storage';
+import { getStudentToken,getParentToken } from '../../Storage';
 import axios from 'axios';
 import Loading from '../Loading';
-
+import toast from "react-hot-toast";
 export default function StudentAttendance() {
-    const { id, standard, section } = useParams();
+    const { id, standard, section,from } = useParams();
     const [attendances, setAttendances] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const { baseUrl } = useContext(GlobalVariableContext);
-    const token = getStudentToken();
+    const token =from==="student"? getStudentToken() : getParentToken();
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -21,20 +21,21 @@ export default function StudentAttendance() {
         const fetchAttendance = async () => {
             try {
                 if (!token) {
-                    navigate('/login/students');
+                    navigate(`/login/${from}`);
                     return;
                 }
-
+                
                 const res = await axios.get(
-                    `${baseUrl}/attendance/one-student/${section}/${standard}/${id}`,
+                    `${baseUrl}/${from}/one-student/${section}/${standard}/${id}`,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
 
                 setAttendances(res.data.data || []);
                 setFiltered(res.data.data || []);
-            } catch (err) {
-                console.log(err);
-            } finally {
+            } catch(err){
+      const errorMsg = err.response?.data?.message || "Server error";
+      toast.error(errorMsg);
+    } finally {
                 setLoading(false);
             }
         };

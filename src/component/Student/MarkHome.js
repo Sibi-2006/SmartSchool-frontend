@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getStudentToken } from '../../Storage';
+import { getParentToken, getStudentToken } from '../../Storage';
 import Loading from '../Loading';
 
 export default function MarkHome() {
-     const { id } = useParams();
+     const { id , from } = useParams();
     const navigate = useNavigate();
-    const token = getStudentToken();
+    const token =from==="student"? getStudentToken() : getParentToken();
     const [loading, setLoading] = useState(true);
     
     useEffect(()=>{
         const fetchStudent = async()=>{
             try{
                 if(!token){
-                    navigate("/login/students");
+                    navigate(`/login/${from}`);
                     return;
                 }
             }catch{
@@ -27,7 +27,7 @@ export default function MarkHome() {
     },[id,token,navigate]);
     const goto = (examType) => {
         const baseUrl = `/student/mark/${id}`;
-        navigate(`${baseUrl}/${examType}`);
+        navigate(`${baseUrl}/${examType}/${from}`);
     }
   return (
     <div className=' pt-32'>

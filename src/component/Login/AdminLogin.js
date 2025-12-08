@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
+import toast from "react-hot-toast";
+
 export default function AdminLogin() {
   const [admin, setAdmin] = useState({ loginId: "", password: "" });
   const [errors, setErrors] = useState({});
@@ -38,7 +40,8 @@ export default function AdminLogin() {
       }, 1500);
     } catch (err) {
       setMessage(err.response?.data?.message || "Server error");
-      console.log(err)
+      const errorMsg = err.response?.data?.message || "Server error";
+              toast.error(errorMsg);
     }
     setLoading(false);
   };

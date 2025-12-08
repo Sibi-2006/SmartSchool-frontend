@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { GlobalVariableContext } from "../../../Context/GlobalVariable"
+import toast from "react-hot-toast";
 
 export default function DeleteTimeTable() {
     const { id,section,standard} = useParams();
@@ -35,7 +36,8 @@ export default function DeleteTimeTable() {
             navigate("/admin/dashboard/view/details/time-table")
           }, 2000);
         }catch(err){
-          console.log(err)
+          const errorMsg = err.response?.data?.message || "Server error";
+toast.error(errorMsg);
         }
       }else{
         setMessage(`correct formet ${standard}-${section}`)

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { GlobalVariableContext } from '../../../Context/GlobalVariable';
 import axios from 'axios';
+import toast from "react-hot-toast";
 
 export default function ViewAllTimeTable() {
   const [timeTable,setTimeTable]=useState([]);
@@ -21,7 +22,9 @@ export default function ViewAllTimeTable() {
         });
         setTimeTable(res.data.AllStandardSection);
       }catch(err){
-        console.log(err);
+        
+const errorMsg = err.response?.data?.message || "Server error";
+toast.error(errorMsg);
       }
     }
     fetchTimeTable();

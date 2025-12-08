@@ -3,6 +3,8 @@ import { GlobalVariableContext } from "../../Context/GlobalVariable"
 import axios from "axios"
 import { setStudentToken } from "../../Storage"
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
 export default function StudentLogin() {
   const [ student,setStudent] = useState({
     loginId:"",
@@ -39,10 +41,11 @@ export default function StudentLogin() {
         setTimeout(() => {
           navigate("/student/dashboard");
         }, 2000);
-        console.log(res.data);
     }catch(err){
       setMessage(err.response?.data?.message || "Server error");
-      console.log(err);
+      const errorMsg = err.response?.data?.message || "Server error";
+toast.error(errorMsg);
+
     }
   }
   return (

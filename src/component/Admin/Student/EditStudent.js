@@ -7,6 +7,7 @@ import StudentBasicDetails from './StudentBasicDetails';
 import AcademicDetails from './AcademicDetails';
 import ParentDetails from './ParentDetails';
 import FeeDeatils from "./FeeDetails";
+import toast from "react-hot-toast";
 
 export default function EditStudent() {
   const { studentId } = useParams();
@@ -68,7 +69,8 @@ export default function EditStudent() {
         setStudent(cleanData);
 
       } catch (err) {
-        console.log(err.message);
+        const errorMsg = err.response?.data?.message || "Server error";
+              toast.error(errorMsg);
       } finally {
         setLoading(false);
       }

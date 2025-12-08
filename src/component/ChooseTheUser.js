@@ -14,6 +14,10 @@ const DATA = [
     title: "STUDENTS",
     about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quos?",
   },
+  {
+    title: "PARENT",
+    about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quos?",
+  },
 ];
 
 export default function ChooseTheUser() {

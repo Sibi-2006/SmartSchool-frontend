@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { GlobalVariableContext } from '../../../Context/GlobalVariable';
 import axios from 'axios';
 import TimeTableStru from '../TimeTableStru';
+import toast from "react-hot-toast";
 
 export default function OneClassTimeTable() {
     const { standard , section } = useParams();
@@ -24,7 +25,8 @@ export default function OneClassTimeTable() {
                 });
                 setTimeTable(res.data.timetable);
             }catch(err){
-                console.log(err);
+               const errorMsg = err.response?.data?.message || "Server error";
+toast.error(errorMsg);
             }
         }
         fetchTimeTable();

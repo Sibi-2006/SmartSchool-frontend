@@ -83,8 +83,6 @@ export default function CreateParent() {
       });
 
     } catch (err) {
-      console.log(err);
-
       const backendMsg =
         err.response?.data?.message || "Something went wrong";
 

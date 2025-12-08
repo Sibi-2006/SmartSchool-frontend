@@ -36,6 +36,9 @@ import EditTimeTable from "./component/Admin/TimeTable/EditTimeTable";
 import AmountDetails from "./component/Admin/AmountDetails";
 import CreateParent from "./component/Admin/Parent/CreateParent";
 import { Toaster } from "react-hot-toast";
+import ParentLogin from "./component/Login/ParentLogin";
+import ParentDashBoard from "./component/Admin/Parent/ParentDashBoard";
+import ServerError from "./component/ServerError";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
@@ -43,6 +46,7 @@ function App() {
       <BrowserRouter>
       <Header />
       <Toaster position="top-center" reverseOrder={false} />
+      
         <Routes>
           <Route path="/" element={<Home />} />
 
@@ -51,6 +55,7 @@ function App() {
           <Route path="/login/admin" element={<AdminLogin/>} />
           <Route path="/login/teachers" element={ <TeacherLogin /> } />
           <Route path="/login/students" element={<StudentLogin />} />
+          <Route path="/login/parent" element={<ParentLogin/>} />
           {/*Admin routers */}
           <Route path="/admin/dashboard" element={ <AdminDashBoard />} />
           <Route path="/admin/dashboard/create/teacher" element={<CreateTeacher />} />
@@ -85,11 +90,16 @@ function App() {
           <Route path="/teacher/profile/:teacherId/edit" element={<EditProfile/>} />
           {/* student */}
           <Route path="/student/dashboard" element={<StudentDashBoard/>} />
-          <Route path="/student/profile/:id" element={<StudentProfile/>} />
-          <Route path="/student/mark-home/:id" element={<MarkHome/>} />
-          <Route path="/student/attandance/:id/:standard/:section" element={<StudentAttendance />} />
-          <Route path="/student/mark/:id/:examType" element={<Result/>} />
-          <Route path="/student/time-table/:standard/:section" element={<TimeTableInStudent/>}/>
+          <Route path="/student/profile/:id/:from" element={<StudentProfile/>} />
+          <Route path="/student/mark-home/:id/:from" element={<MarkHome/>} />
+          <Route path="/student/attandance/:id/:standard/:section/:from" element={<StudentAttendance />} />
+          <Route path="/student/mark/:id/:examType/:from" element={<Result/>} />
+          <Route path="/student/time-table/:standard/:section/:from" element={<TimeTableInStudent/>}/>
+
+          {/* parent */}
+          <Route path="/parent/dashBoard" element={<ParentDashBoard/>} />
+          {/* error */}
+          <Route path="/error/404-on/fetching/data" element={<ServerError/>}/>
         </Routes>
       </BrowserRouter>
     </div>
