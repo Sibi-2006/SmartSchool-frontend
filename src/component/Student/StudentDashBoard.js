@@ -19,7 +19,7 @@ export default function StudentDashBoard() {
     const fetchStudent = async()=>{
       try{
           if(!token){
-            navigate("/login/students");
+            navigate("/login/student");
             return;
           }
           const res = await axios.get(`${baseUrl}/student/dashboard`,{

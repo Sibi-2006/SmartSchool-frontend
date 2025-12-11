@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import { setTeacherToken } from "../../Storage.js"
@@ -95,6 +95,7 @@ export default function TeacherLogin() {
             onChange={e=>handleChanges(e)}
             className="form-input"
           />
+          <Link to={"/forget/password/admin"}>forget Password?</Link>
           {
           error.password && <p className=" text-red-500">{error.password}</p>
         }

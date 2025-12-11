@@ -11,7 +11,7 @@ const DATA = [
     about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quos?",
   },
   {
-    title: "STUDENTS",
+    title: "STUDENT",
     about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quos?",
   },
   {

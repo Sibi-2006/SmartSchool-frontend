@@ -39,6 +39,7 @@ import { Toaster } from "react-hot-toast";
 import ParentLogin from "./component/Login/ParentLogin";
 import ParentDashBoard from "./component/Admin/Parent/ParentDashBoard";
 import ServerError from "./component/ServerError";
+import ForgetPassword from "./component/forgetPassword/ForgetPassword";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
@@ -54,7 +55,7 @@ function App() {
           {/*Login's routers */}
           <Route path="/login/admin" element={<AdminLogin/>} />
           <Route path="/login/teachers" element={ <TeacherLogin /> } />
-          <Route path="/login/students" element={<StudentLogin />} />
+          <Route path="/login/student" element={<StudentLogin />} />
           <Route path="/login/parent" element={<ParentLogin/>} />
           {/*Admin routers */}
           <Route path="/admin/dashboard" element={ <AdminDashBoard />} />
@@ -100,6 +101,8 @@ function App() {
           <Route path="/parent/dashBoard" element={<ParentDashBoard/>} />
           {/* error */}
           <Route path="/error/404-on/fetching/data" element={<ServerError/>}/>
+          {/* forget password */}
+          <Route path="/forget/password/:from" element={<ForgetPassword/>} />
         </Routes>
       </BrowserRouter>
     </div>

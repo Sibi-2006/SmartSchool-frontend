@@ -5,10 +5,11 @@ import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import axios from "axios";
 export default function CreateAdmin() {
   const [admin, setAdmin] = useState({
-    userName: "",
+    fullName: "",
     email: "",
     password: "",
     loginId: "",
+    phone:"",
   });
   const [message,setMessage] = useState("")
   const navigate = useNavigate();
@@ -25,10 +26,12 @@ export default function CreateAdmin() {
   const isValid = () => {
     const temp = {};
 
-    if (!admin.userName.trim()) temp.userName = "Username is required";
+    if (!admin.fullName.trim()) temp.fullName = "fullName is required";
     if (!admin.email.trim()) temp.email = "Email is required";
     if (!admin.password.trim()) temp.password = "Password is required";
     if (!admin.loginId.trim()) temp.loginId = "Login ID is required";
+    if (!admin.phone.trim()) temp.phone = "phone is required";
+
 
     setError(temp);
 
@@ -81,17 +84,17 @@ export default function CreateAdmin() {
             Create Admin
           </h1>
 
-          {/* Username */}
+          {/* fullName */}
           <input
             type="text"
-            placeholder="UserName"
+            placeholder="fullName"
             className="form-input"
-            name="userName"
-            value={admin.userName}
+            name="fullName"
+            value={admin.fullName}
             onChange={handleChanges}
           />
-          {error.userName && (
-            <p className="text-red-500">{error.userName}</p>
+          {error.fullName && (
+            <p className="text-red-500">{error.fullName}</p>
           )}
 
           {/* Email */}
@@ -104,6 +107,18 @@ export default function CreateAdmin() {
             onChange={handleChanges}
           />
           {error.email && <p className="text-red-500">{error.email}</p>}
+
+          <input
+            type="text"
+            placeholder="phone number"
+            className="form-input"
+            name="phone"
+            value={admin.phone}
+            onChange={handleChanges}
+          />
+          {error.phone && (
+            <p className="text-red-500">{error.phone}</p>
+          )}
 
           {/* Login ID */}
           <input

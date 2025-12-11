@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { GlobalVariableContext } from "../../Context/GlobalVariable"
 import axios from "axios"
 import { setStudentToken } from "../../Storage"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 export default function StudentLogin() {
@@ -91,6 +91,7 @@ toast.error(errorMsg);
             onChange={(e)=>handleChanges(e)}
             className="form-input"
           />
+          <Link to={"/forget/password/student"}>forget Password?</Link>
           {error.password&&<p className=" text-red-400 font-bold text-sm">{error.password}</p>}
         </div>
         {

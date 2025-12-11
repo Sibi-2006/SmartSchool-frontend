@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import toast from "react-hot-toast";
 
@@ -83,6 +83,7 @@ export default function AdminLogin() {
             onChange={handleChanges}
             className="form-input w-full border p-2 rounded"
           />
+          <Link to={"/forget/password/admin"}>forget Password?</Link>
           {errors.password && <div className="text-red-500 text-sm mt-1">{errors.password}</div>}
         </div>
 
