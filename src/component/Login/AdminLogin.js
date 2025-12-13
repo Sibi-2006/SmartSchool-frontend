@@ -29,6 +29,7 @@ export default function AdminLogin() {
     if (!isValid()) return;
 
     setLoading(true);
+    console.log(baseUrl)
     try {
       const res = await axios.post(`${baseUrl}/adminlogin/login`, admin);
 
@@ -39,6 +40,7 @@ export default function AdminLogin() {
         navigate("/admin/dashboard");
       }, 1500);
     } catch (err) {
+      console.log(err)
       setMessage(err.response?.data?.message || "Server error");
       const errorMsg = err.response?.data?.message || "Server error";
               toast.error(errorMsg);

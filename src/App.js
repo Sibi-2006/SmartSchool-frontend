@@ -40,6 +40,8 @@ import ParentLogin from "./component/Login/ParentLogin";
 import ParentDashBoard from "./component/Admin/Parent/ParentDashBoard";
 import ServerError from "./component/ServerError";
 import ForgetPassword from "./component/forgetPassword/ForgetPassword";
+import AdminHome from "./component/AdminHome";
+import TeacherHome from "./component/Teacher/TeacherHome";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
@@ -58,13 +60,14 @@ function App() {
           <Route path="/login/student" element={<StudentLogin />} />
           <Route path="/login/parent" element={<ParentLogin/>} />
           {/*Admin routers */}
-          <Route path="/admin/dashboard" element={ <AdminDashBoard />} />
+          <Route path="/admin/dashboard" element={ <AdminHome/>} />
           <Route path="/admin/dashboard/create/teacher" element={<CreateTeacher />} />
           <Route path="/admin/dashboard/create/student" element={<CreateStudent />} /> 
           <Route path="/admin/dashboard/create/admin" element={<CreateAdmin />} /> 
           <Route path="/admin/dashboard/create/parent" element={<CreateParent/>} />
           <Route path="/admin/dashboard/view/details/:category" element={<ViewDetails/>} />
           <Route path="/admin/amount/details" element={<AmountDetails/>} />
+          <Route path="/admin/all-details" element={<AdminDashBoard/>}/>
           {/* <Route path="/admin/dashboard/view/all/details/in/student" element={<ViewAllStudent />} /> */}
           <Route path="/admin/dashboard/view/details/oneclass/:standard/:section/:category" element={ <ViewOneClass />} />
           <Route path="/admin/dashboard/view/details/oneStudent/:studentId/:category" element={ <OneStudent/>} />
@@ -82,6 +85,7 @@ function App() {
           <Route path="/admin/edit/time-table/:id/:section/:standard" element={<EditTimeTable/>} />
 
           {/* teacher  */}
+          <Route path="/dashBoard" element={<TeacherHome/>}/>
           <Route path="/teacher/:from" element={ <DashBoard />} />
           <Route path="/teacher/view/class/:standard/:section/:category" element={<ViewOneClass/> } />
           <Route path="/teacher/view/details/oneStudent/:studentId/:category" element={ <OneStudent/>} />

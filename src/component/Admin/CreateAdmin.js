@@ -1,5 +1,4 @@
 import React, { useState , useContext } from "react";
-import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import axios from "axios";
@@ -73,9 +72,9 @@ export default function CreateAdmin() {
 
   return (
     <div className="flex pt-10">
-      <NavBar />
 
-      <div className="w-full md:w-3/4 md:ml-[25%] flex items-center justify-center min-h-screen p-4 bg-gray-100 py-32 md:py-20 overflow-y-auto">
+
+      <div className="w-full  flex items-center justify-center min-h-screen p-4 bg-gray-100 py-32 md:py-20 overflow-y-auto">
         <form
           onSubmit={handleSubmit}
           className="bg-white shadow-xl rounded-2xl p-10 w-[90%] max-w-lg border-t-4 border-primary flex flex-col gap-4 overflow-y-auto"

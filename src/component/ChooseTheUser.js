@@ -4,26 +4,27 @@ import { useNavigate } from 'react-router-dom';
 const DATA = [
   {
     title: "ADMIN",
-    about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quos?",
+    about: "Manage the entire system, control users, monitor activities, and keep everything running smoothly.",
   },
   {
-    title: "TEACHERs",
-    about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quos?",
+    title: "TEACHER",
+    about: "Handle classes, manage students, share lessons, track attendance, and evaluate performance.",
   },
   {
     title: "STUDENT",
-    about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quos?",
+    about: "Access lessons, view attendance, track progress, submit work, and stay connected with teachers.",
   },
   {
     title: "PARENT",
-    about: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus, quos?",
+    about: "Monitor your child’s academic progress, attendance, and receive important school updates.",
   },
 ];
+
 
 export default function ChooseTheUser() {
     const navigate = useNavigate();
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-6 p-6 bg-light min-h-screen overflow-y-auto">
+    <div className="flex flex-col md:flex-row justify-center items-center gap-6 py-28 p-6 bg-light min-h-screen overflow-y-auto">
       {DATA.map((data, index) => (
         <div
           key={index}

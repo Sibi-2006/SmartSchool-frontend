@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getTeacherToken } from "../../Storage";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import axios from "axios";
-import NavBar from "./NavBar";
 import Loading from "../Loading";
 
 export default function DashBoard() {
@@ -119,9 +118,8 @@ export default function DashBoard() {
 
     return (
         <div>
-            <NavBar />
 
-            <div className="w-full md:w-3/4 md:fixed right-0 h-screen overflow-y-auto">
+            <div className="w-full h-screen overflow-y-auto">
 
             {
                 loading&&(

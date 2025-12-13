@@ -38,7 +38,7 @@ export default function TeacherLogin() {
         setTeacherToken(res.data.token);
         setMessage(res.data.message)
         setTimeout(() => {
-          navigate("/teacher/dashboard");
+          navigate("/dashboard");
         }, 2000);
     }catch(err){
       setMessage("error on server")
