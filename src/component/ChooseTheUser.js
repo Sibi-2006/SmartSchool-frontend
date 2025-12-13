@@ -7,7 +7,7 @@ const DATA = [
     about: "Manage the entire system, control users, monitor activities, and keep everything running smoothly.",
   },
   {
-    title: "TEACHER",
+    title: "TEACHERS",
     about: "Handle classes, manage students, share lessons, track attendance, and evaluate performance.",
   },
   {
