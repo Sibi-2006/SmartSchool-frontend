@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+# Smart School Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📌 Project Overview
 
-## Available Scripts
+The **Smart School Management System** is a full-stack web application designed to digitize and simplify school operations. It provides a centralized platform for managing students, teachers, and administrative activities efficiently. The system reduces manual work and improves communication between different roles in a school.
 
-In the project directory, you can run:
+This project is built as a **real-world inspired application**, focusing on authentication, role-based access, and scalable architecture.
+* **SmartSchool:** [https://smartschool-4jll.onrender.com](https://smartschool-4jll.onrender.com)
+---
 
-### `npm start`
+## 🎯 Project Objectives
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* To manage school data digitally and securely
+* To reduce paperwork and manual processes
+* To provide role-based access for Admin, Teacher, and Student
+* To improve efficiency and transparency in school management
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 👥 User Roles
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 👤 Admin
 
-### `npm run build`
+* Manage teachers and students
+* Control system settings
+* View overall school data
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 👩‍🏫 Teacher
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Manage student attendance
+* View assigned classes and students
+* Update academic information
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🧑‍🎓 Student
 
-### `npm run eject`
+* View personal details
+* Check attendance and academic information
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🔐 Authentication & Security
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* JWT-based authentication
+* Token expiry set to **1 day** for better security
+* Role-based authorization (Admin / Teacher / Student)
+* Protected API routes
+* Password hashing implemented
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🛠️ Tech Stack
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Frontend
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* React.js
+* HTML5, CSS3, JavaScript
 
-### Code Splitting
+### Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* Node.js
+* Express.js
+* JWT (JSON Web Token)
 
-### Analyzing the Bundle Size
+### Database
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* MongoDB
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+* Frontend & Backend hosted on **Render**
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🌐 Live Links
+
+* **Frontend:** [https://smartschool-4jll.onrender.com](https://smartschool-4jll.onrender.com)
+
+---
+
+## 📁 Project Features
+
+* User authentication and authorization
+* Secure login system
+* Role-based dashboards
+* Student and teacher management
+* RESTful API architecture
+* Error handling and validation
+
+---
+
+## 🚀 Future Improvements
+
+* Refresh token implementation
+* Improved UI/UX and mobile responsiveness
+* Attendance and performance analytics
+* Email/SMS notifications
+* PDF report generation
+* Activity logs
+
+---
+
+
+---
+
+## 📝 Conclusion
+
+The Smart School Management System demonstrates practical knowledge of full-stack web development, authentication, and deployment. It is suitable as an academic project and can be scaled further for real-world use with additional features and security enhancements.
+
+---
+
+## 👨‍💻 Developed By
+
+**Sibi**
