@@ -93,9 +93,7 @@ This project is built as a **real-world inspired application**, focusing on auth
 * Refresh token implementation
 * Improved UI/UX and mobile responsiveness
 * Attendance and performance analytics
-* Email/SMS notifications
-* PDF report generation
-* Activity logs
+
 
 ---
 
