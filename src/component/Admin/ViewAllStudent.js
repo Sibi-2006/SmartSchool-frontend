@@ -3,6 +3,7 @@ import { GlobalVariableContext } from "../../Context/GlobalVariable"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../Loading';
+import NavBar from './NavBar';
 export default function ViewAllStudent() {
     const [classes , setClasses ] = useState([]);
     const { baseUrl } = useContext(GlobalVariableContext);
@@ -31,6 +32,9 @@ export default function ViewAllStudent() {
     },[baseUrl,token,navigate]);
      return (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-32 px-10 w-full'>
+            
+
+            <NavBar/>
             {
                 loading&&(
                     <Loading/>

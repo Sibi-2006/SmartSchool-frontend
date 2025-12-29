@@ -10,7 +10,8 @@ export default function TimeTableStru({
         const days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
     const navigate = useNavigate();
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="p-6 max-w-4xl mt-10 mx-auto">
+      
             <h1 className="text-3xl font-bold text-center mb-6">Class {standard} - Section {section} Timetable</h1>
 
             {!timeTable || !timeTable.days ? (

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GlobalVariableContext } from '../../Context/GlobalVariable';
-import { getStudentToken,getParentToken } from '../../Storage';
+import { getStudentToken,getParentToken, getTeacherToken } from '../../Storage';
 import axios from 'axios';
 import Loading from '../Loading';
 import toast from "react-hot-toast";
@@ -10,23 +10,35 @@ export default function StudentAttendance() {
     const [attendances, setAttendances] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const { baseUrl } = useContext(GlobalVariableContext);
-    const token =from==="student"? getStudentToken() : getParentToken();
+    const [token, setToken] = useState("");
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     const [searchDate, setSearchDate] = useState('');
     const [searchStatus, setSearchStatus] = useState('');
+    useEffect(() => {
+    if (from === "student") {
+        setToken(getStudentToken());
+    } 
+    else if (from === "teacher") {
+        setToken(getTeacherToken());
+    } 
+    else if (from === "admin") {
+        setToken(localStorage.getItem("adminToken"));
+    } 
+    else if (from === "parent") {
+        setToken(getParentToken());
+    }
+}, [from]);
 
     useEffect(() => {
+        
         const fetchAttendance = async () => {
             try {
-                if (!token) {
-                    navigate(`/login/${from}`);
-                    return;
-                }
+                if (!token) return;
                 
                 const res = await axios.get(
-                    `${baseUrl}/${from}/one-student/${section}/${standard}/${id}`,
+                    `${baseUrl}/attendance/one-student/${section}/${standard}/${id}/${from}`,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
 
@@ -44,6 +56,7 @@ export default function StudentAttendance() {
 
     // Filter logic
     useEffect(() => {
+        if (!token) return;
         let filteredData = [...attendances];
 
         if (searchDate) {
@@ -62,6 +75,15 @@ export default function StudentAttendance() {
 
         setFiltered(filteredData);
     }, [searchDate, searchStatus, attendances]);
+
+    const totalClasses = attendances.length;
+
+const presentCount = attendances.filter(record =>
+  record.students.some(s => s.status === "present")
+).length;
+
+const attendancePercentage =
+  totalClasses === 0 ? 0 : ((presentCount / totalClasses) * 100).toFixed(2);
 
     if (loading) return <Loading />;
 
@@ -87,6 +109,18 @@ export default function StudentAttendance() {
                     <option value="absent">Absent</option>
                 </select>
             </div>
+            <div className="text-center mb-4">
+                <h2 className="text-lg font-semibold">
+                    Attendance Percentage: 
+                    <span className="ml-2 text-blue-600">
+                    {attendancePercentage}%
+                    </span>
+                </h2>
+                <p className="text-sm text-gray-500">
+                    Present: {presentCount} / {totalClasses}
+                </p>
+                </div>
+
 
             {filtered.length === 0 ? (
                 <p className="text-center text-gray-500">No attendance records found.</p>

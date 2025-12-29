@@ -52,6 +52,12 @@ export default function DeleteStudent() {
 
   return (
     <div className="flex items-center justify-center min-h-screen flex-col gap-5">
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-5 ml-5 mt-10 px-3 py-2 h-16 rounded-lg bg-primary text-white font-semibold shadow-md hover:shadow-lg transition"
+      >
+        ⬅ Back
+      </button>
       <form
         className="bg-gray-200 border-2 border-red-400 rounded-xl shadow-md p-3 gap-4 flex items-center justify-center flex-col w-11/12 md:w-1/4"
         onSubmit={handleSubmit}

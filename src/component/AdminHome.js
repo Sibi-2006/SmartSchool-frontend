@@ -10,6 +10,7 @@ import CREATE_PARENT from "../image/parent.jpeg"
 import AMOUNT from "../image/amount.jpeg";
 import TIME_TABLE from "../image/add_timeTable.jpeg";
 import DEATILS from "../image/deatils.jpeg";
+import certificate from "../image/certificate.jpeg";
 export default function AdminHome() {
     const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
@@ -86,12 +87,26 @@ export default function AdminHome() {
                 <img className='h-28 md:h-52 w-full'  src={CREATE_PARENT} alt="parent" />
                 <h1 className=' font-bold text-dark text-2xl text-center py-2'>CREATE PARENT</h1>
             </div>
+            {/* verified-marks */}
+            <div className=' bg-gray-200 shadow-md rounded-md hover:scale-105 transform duration-250 hover:cursor-pointer'
+            onClick={()=>navigate(`/verify/marks/by-parents/admin`)}
+            >
+                <img className='h-28 md:h-52 w-full'  src={CREATE_PARENT} alt="parent" />
+                <h1 className=' font-bold text-dark text-2xl text-center py-2'>Verified Marks</h1>
+            </div>
             {/* time-table */}
             <div className=' bg-gray-200 shadow-md rounded-md hover:scale-105 transform duration-250 hover:cursor-pointer'
             onClick={()=>navigate(`${baseUrlNav}/time-table`)}
             >
                 <img className='h-28 md:h-52 w-full'  src={TIME_TABLE} alt="time-table" />
                 <h1 className=' font-bold text-dark text-2xl text-center py-2'>ADD TIME-TABLE</h1>
+            </div>
+            {/* certificate request */}
+             <div className=' bg-gray-200 shadow-md rounded-md hover:scale-105 transform duration-250 hover:cursor-pointer'
+            onClick={()=>navigate("/admin/certificate-request")}
+            >
+                <img className='h-28 md:h-52 w-full'  src={certificate} alt="certificate" />
+                <h1 className=' font-bold text-dark text-2xl text-center py-2'>Certificate Request</h1>
             </div>
             {/* admout */}
             <div className=' bg-gray-200 shadow-md rounded-md hover:scale-105 transform duration-250 hover:cursor-pointer'

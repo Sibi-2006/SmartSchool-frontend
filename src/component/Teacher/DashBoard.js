@@ -4,6 +4,7 @@ import { getTeacherToken } from "../../Storage";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import axios from "axios";
 import Loading from "../Loading";
+import NavBar from "./NavBar";
 
 export default function DashBoard() {
     const navigate = useNavigate();
@@ -118,7 +119,7 @@ export default function DashBoard() {
 
     return (
         <div>
-
+            <NavBar/>
             <div className="w-full h-screen overflow-y-auto">
 
             {

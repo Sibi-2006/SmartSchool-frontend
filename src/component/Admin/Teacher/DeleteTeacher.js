@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { GlobalVariableContext } from "../../../Context/GlobalVariable";
 import toast from "react-hot-toast";
+import NavBar from "../NavBar";
 
 export default function DeleteTeacher() {
     const { teacherId } = useParams();
@@ -52,6 +53,7 @@ export default function DeleteTeacher() {
   };
   return (
     <div className="flex items-center justify-center min-h-screen flex-col gap-5">
+      <NavBar/>
       <form
         className="bg-gray-200 border-2 border-red-400 rounded-xl shadow-md p-3 gap-4 flex items-center justify-center flex-col w-11/12 md:w-1/4"
         onSubmit={handleSubmit}

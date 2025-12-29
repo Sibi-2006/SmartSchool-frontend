@@ -2,6 +2,7 @@ import React, { useState , useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import axios from "axios";
+import NavBar from "./NavBar";
 export default function CreateAdmin() {
   const [admin, setAdmin] = useState({
     fullName: "",
@@ -72,7 +73,8 @@ export default function CreateAdmin() {
 
   return (
     <div className="flex pt-10">
-
+      
+<NavBar/>
 
       <div className="w-full  flex items-center justify-center min-h-screen p-4 bg-gray-100 py-32 md:py-20 overflow-y-auto">
         <form

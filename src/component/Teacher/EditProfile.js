@@ -95,7 +95,7 @@ export default function EditProfile() {
   return (
     <div>
       <NavBar />
-              <div className="w-full md:w-3/4 md:fixed right-0 h-screen overflow-y-auto">
+              <div className="w-full  h-screen overflow-y-auto">
               <ToastContainer position="top-center" autoClose={1500} />
                   {
                       loading&&(

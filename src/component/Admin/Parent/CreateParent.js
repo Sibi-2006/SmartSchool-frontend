@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { GlobalVariableContext } from "../../../Context/GlobalVariable";
+import NavBar from "../NavBar";
 
 export default function CreateParent() {
   const [parent, setParent] = useState({
@@ -12,6 +13,7 @@ export default function CreateParent() {
     studentId: "",
     loginId: "",
     password: "",
+    secondPassword:""
   });
 
   const [error, setError] = useState({});
@@ -41,7 +43,7 @@ export default function CreateParent() {
     if (!parent.studentId.trim()) temp.studentId = "student-id is required";
     if (!parent.loginId.trim()) temp.loginId = "login-id is required";
     if (!parent.password.trim()) temp.password = "password is required";
-
+    if(!parent.secondPassword.trim()) temp.secondPassword="second password is required";
     setError(temp);
     return Object.keys(temp).length === 0;
   };
@@ -79,6 +81,7 @@ export default function CreateParent() {
         studentId: "",
         loginId: "",
         password: "",
+        secondPassword:""
       });
 
     } catch (err) {
@@ -92,6 +95,7 @@ export default function CreateParent() {
 
   return (
     <div className="flex">
+      <NavBar/>
       <div className="w-full  flex items-center justify-center min-h-screen p-4 bg-gray-100 py-32 md:py-20 overflow-y-auto">
         <form
           className="bg-white shadow-xl rounded-2xl p-10 w-[90%] max-w-lg border-t-4 border-primary flex flex-col gap-4 overflow-y-auto"
@@ -185,6 +189,18 @@ export default function CreateParent() {
             <p className="text-red-400 font-bold text-sm">{error.password}</p>
           )}
 
+        <label className="text-primary font-semibold">Enter second password </label>
+          <input
+            type="text"
+            placeholder="second password"
+            className="form-input"
+            name="secondPassword"
+            value={parent.secondPassword}
+            onChange={handleChange}
+          />
+          {error.secondPassword && (
+            <p className="text-red-400 font-bold text-sm">{error.secondPassword}</p>
+          )}
           <button className="main-btn">Submit</button>
         </form>
       </div>

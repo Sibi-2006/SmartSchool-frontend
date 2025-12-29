@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import axios from "axios";
 import Loading from "../Loading";
+import NavBar from "./NavBar";
 
 export default function OneTeacher() {
   const { teacherId } = useParams();
@@ -46,14 +47,8 @@ export default function OneTeacher() {
 
   return (
     <div className="py-28 px-6 md:px-20 w-full bg-gray-50 min-h-screen">
-
-      {/* Back Button */}
-      <button
-        onClick={() => navigate(-1)}
-        className="mb-5 px-5 py-2 rounded-lg bg-primary text-white font-semibold shadow-md hover:shadow-lg transition"
-      >
-        ⬅ Back
-      </button>
+      <NavBar/>
+      
 
       <h1 className="text-3xl text-center font-bold text-primary mb-10">
         Teacher Full Details

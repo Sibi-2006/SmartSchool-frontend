@@ -13,6 +13,7 @@ export default function Home() {
           setIsSucces(res.data.isSucces)
         }catch(err){
           setIsSucces(false);
+          console.log(err)
         }
       }
       connectSever();

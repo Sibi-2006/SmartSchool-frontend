@@ -5,6 +5,7 @@ import { logoutTeacher } from '../../Storage';
 import { GlobalVariableContext } from '../../Context/GlobalVariable';
 import { getTeacherToken } from '../../Storage';
 import axios from 'axios';
+
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const token = getTeacherToken();
@@ -36,52 +37,52 @@ export default function NavBar() {
 
         fetchTeacher();
     }, [baseUrl, token, navigate]);
+    const handleNav = (path) => {
+    navigate(path);
+    setIsOpen(false); 
+  };
   return (
-    <>
-      {/* MOBILE TOP NAV */}
-      <nav className="fixed top-0 left-0 w-full bg-primary text-light p-4 flex justify-between items-center md:hidden z-50">
-        <h1 className="text-xl font-bold">Teacher-dashboard</h1>
-
-        <button onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </nav>
-
-      {/* SIDEBAR (mobile + desktop) */}
-<div
-  className={`
-    fixed left-0 top-0 bg-primary h-full 
-    w-1/2 sm:w-1/3 md:w-1/4 
-    text-light 
-    pt-20 md:pt-0 
-    ${isOpen ? "block" : "hidden"} 
-    md:block
-    overflow-y-auto
-  `}
->
-  <nav className="flex flex-col items-center gap-6 p-4 text-light font-bold text-xl pt-24">
-    <button className="nav-btn" onClick={() => navigate("/teacher/dashboard")}>
-      Dash Board
-    </button>
-
-    <button className="nav-btn" onClick={() => navigate("/teacher/ToMarkAttendance")}>
-      Mark attendance
-    </button>
-
-    <button className="nav-btn" onClick={() => navigate("/teacher/add-marks")}>
-      Add Marks
-    </button>
-
-    <button className="nav-btn" onClick={() => navigate(`/teacher/profile/${teacherId}`)}>
-      Profile
-    </button>
-
-    <button className="nav-btn" onClick={handleLogout}>
-      Log-Out
-    </button>
-  </nav>
-</div>
-
-    </>
+    <div className="fixed top-0 left-0 z-50 w-full bg-primary py-3 px-6 text-xl text-light">
+          {/* Top Bar */}
+          <div className="flex justify-between items-center">
+            <h1
+              className="font-bold cursor-pointer md:hidden lg:hidden"
+             onClick={() => navigate(-1)}
+            >
+              ⬅ Back
+            </h1>
+    
+            {/* Mobile menu button */}
+            <button
+              className="md:hidden"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+    
+          {/* Desktop Menu */}
+          <nav className="hidden md:flex flex-row justify-around items-center mt-3">
+            <button  className="nav-btn-2" onClick={() => navigate(-1)}>⬅ Back</button>
+            <button className="nav-btn-2" onClick={() => handleNav("/dashBoard")}>Dashboard</button>
+              <button className="nav-btn-2" onClick={() => handleNav(`/teacher/dashboard`)}>Assigned class</button>
+              <button className="nav-btn-2" onClick={() => handleNav(`/teacher/ToMarkAttendance`)}>Attendance</button>
+              <button className="nav-btn-2" onClick={() => handleNav(`/teacher/add-marks`)}>Add Marks</button>
+              <button className="nav-btn-2" onClick={() => handleNav(`/teacher/profile/${teacherId}`)}>Profile</button>
+              <button className='nav-btn-2' onClick={()=>handleLogout()}>Log-Out</button>
+          </nav>
+    
+          {/* Mobile Menu */}
+          {isOpen && (
+            <div className="md:hidden mt-4 flex flex-col gap-3 bg-primary border-t border-white/20 pt-4">
+              <button className="nav-btn-2" onClick={() => handleNav("/dashBoard")}>Dashboard</button>
+              <button className="nav-btn-2" onClick={() => handleNav(`/teacher/dashboard`)}>Assigned class</button>
+              <button className="nav-btn-2" onClick={() => handleNav(`/teacher/ToMarkAttendance`)}>Attendance</button>
+              <button className="nav-btn-2" onClick={() => handleNav(`/teacher/add-marks`)}>Add Marks</button>
+              <button className="nav-btn-2" onClick={() => handleNav(`/teacher/profile/${teacherId}`)}>Profile</button>
+              <button className='nav-btn-2' onClick={()=>handleLogout()}>Log-Out</button>
+            </div>
+          )}
+        </div>
   );
 }

@@ -55,3 +55,10 @@ body{
 .animate-fadeScale {
   animation: fadeScale 1.5s infinite ease-in-out;
 }
+
+.nav-btn-2{
+    @apply text-light text-xl font-bold;
+}
+.nav-btn-2:hover,:focus{
+    @apply underline  transition duration-1000;
+}

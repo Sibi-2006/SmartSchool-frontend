@@ -5,6 +5,7 @@ import LoginCredentials from './Teacher/LoginCredentials';
 import { GlobalVariableContext } from "../../Context/GlobalVariable"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
 export default function CreateTeacher() {
     const [steps , setSteps ] = useState(1);
     const [errors, setErrors] = useState({});
@@ -125,7 +126,8 @@ const validateStep = () => {
 
   return (
     <div className="flex ">
-
+      
+        <NavBar/>
 
       {/* MAIN CONTENT AREA */}
       <div className="w-full  flex items-center justify-center min-h-screen p-4 bg-gray-100 py-32 md:py-20 overflow-y-auto">

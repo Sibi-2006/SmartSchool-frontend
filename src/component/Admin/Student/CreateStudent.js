@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { GlobalVariableContext } from "../../../Context/GlobalVariable";
 import toast from "react-hot-toast";
+import NavBar from "../NavBar";
 
 export default function CreateStudent() {
   const emptyStudent = {
@@ -149,7 +150,7 @@ export default function CreateStudent() {
 
   return (
     <div className="flex">
-
+      <NavBar/>
       <div className="w-full  flex items-center justify-center min-h-screen p-4 bg-gray-100 py-32 md:py-20 overflow-y-auto">
         <form
           className="bg-white shadow-xl rounded-2xl p-10 w-[90%] max-w-lg border-t-4 border-primary flex flex-col gap-4 overflow-y-auto"

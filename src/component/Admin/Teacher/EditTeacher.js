@@ -7,6 +7,7 @@ import LoginCredentials from '../Teacher/LoginCredentials';
 
 import axios from "axios";
 import toast from "react-hot-toast";
+import NavBar from "../NavBar";
 
 
 export default function EditTeacher() {
@@ -135,6 +136,7 @@ if (steps === 3) {
    }
   return (
     <div className=" flex items-center justify-center py-32 flex-col">
+      <NavBar/>
         <h1 className="text-2xl text-primary font-bold">Edit Teacher's</h1>
       <form
       onSubmit={handleSubmit}

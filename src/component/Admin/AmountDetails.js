@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlobalVariableContext } from '../../Context/GlobalVariable';
 import axios from 'axios';
+import NavBar from './NavBar';
 
 export default function AmountDetails() {
     const [amount, setAmount] = useState(null);
@@ -32,6 +33,8 @@ export default function AmountDetails() {
 
     return (
         <div className="max-w-3xl mx-auto mt-20 px-4">
+            
+            <NavBar/>
             <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
                 Amount Details
             </h1>

@@ -5,6 +5,7 @@ import axios from 'axios';
 import ViewAllStudent from './ViewAllStudent';
 import ViewTeachersDetails from "./ViweTeachersDetails"
 import ViewAdmins from './ViewAdmins';
+import NavBar from './NavBar';
 export default function ViewDetails() {
     const { category } = useParams();
     const { baseUrl } = useContext(GlobalVariableContext);
@@ -30,6 +31,8 @@ export default function ViewDetails() {
     },[baseUrl, category, token, navigate])
   return (
     <div className='flex'>
+      
+      <NavBar/>
       {
         category.toLowerCase()==="student" && <ViewAllStudent  />
       }

@@ -39,7 +39,7 @@ export default function TeacherProfile() {
   return (
     <div>
       <NavBar />
-        <div className="w-full md:w-3/4 md:fixed right-0 h-screen overflow-y-auto">
+        <div className=" h-screen overflow-y-auto">
             {
                 loading&&(
                     <Loading/>

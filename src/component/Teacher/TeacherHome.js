@@ -67,6 +67,13 @@ export default function TeacherHome() {
                         <img className='h-28 md:h-52 w-full'  src={ADDMARK} alt="add mark" />
                         <h1 className=' font-bold text-dark text-2xl text-center py-2'>ADD MARK</h1>
                     </div>
+                    {/* verified-marks */}
+                    <div className=' bg-gray-200 shadow-md rounded-md hover:scale-105 transform duration-250 hover:cursor-pointer'
+                        onClick={()=>navigate(`/verify/marks/by-parents/teacher`)}
+                    >
+                        <img className='h-28 md:h-52 w-full'  src={ADDMARK} alt="add mark" />
+                        <h1 className=' font-bold text-dark text-2xl text-center py-2'>Verified MARK</h1>
+                    </div>
                     {/* ADD mark */}
                     <div className=' bg-gray-200 shadow-md rounded-md hover:scale-105 transform duration-250 hover:cursor-pointer'
                     onClick={() => navigate(`/teacher/profile/${teacherId}`)}

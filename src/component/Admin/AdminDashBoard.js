@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GlobalVariableContext } from "../../Context/GlobalVariable";
 import Loading from "../Loading";
+import NavBar from "./NavBar";
 export default function AdminDashboard() {
   const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
@@ -50,6 +51,8 @@ export default function AdminDashboard() {
 
   return (
     <div className="p-8">
+     
+      <NavBar/>
      <div className=" w-full right-0 flex items-center justify-center h-screen ">
      {
       !admin&&(

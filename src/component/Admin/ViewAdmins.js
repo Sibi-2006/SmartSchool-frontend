@@ -1,17 +1,14 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import NavBar from './NavBar';
 
 export default function ViewAdmins({users}) {
     const navigate = useNavigate();
-    console.log(users)
+
   return (
     <div className=' py-32 w-full'>
-        <button
-        onClick={() => navigate(-1)}
-        className="mb-5 px-5 py-2 rounded-lg bg-primary text-white font-semibold shadow-md hover:shadow-lg transition ml-10"
-      >
-        ⬅ Back
-      </button>
+      <NavBar/>
+      
         <h1 className=' text-3xl text-secondary font-bold text-center'>Admin's</h1>
 
       <div

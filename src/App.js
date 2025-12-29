@@ -42,6 +42,14 @@ import ServerError from "./component/ServerError";
 import ForgetPassword from "./component/forgetPassword/ForgetPassword";
 import AdminHome from "./component/AdminHome";
 import TeacherHome from "./component/Teacher/TeacherHome";
+import AllClasses from "./component/Admin/verify_marks/AllClasses";
+import SeeVerifyMarksByClass from "./component/Admin/verify_marks/SeeVerifyMarksByClass";
+import RequestCertificate from "./component/Admin/Parent/RequestCertificate";
+import CertificateRequest from "./component/Admin/CertificateRequest";
+import OneStudentCertificates from "./component/Admin/OneStudentCertificates";
+import StudentAllCertificatesRequest from "./component/Admin/Parent/StudentAllCertificatesRequest";
+import OneStudentCertificateInParent from "./component/Admin/Parent/OneStudentCertificateInParent";
+import CertificatesHome from "./component/Certificates/CertificatesHome";
 // import ViewAllStudent from "./component/Admin/ViewAllStudent";
 function App() {
   return (
@@ -68,6 +76,9 @@ function App() {
           <Route path="/admin/dashboard/view/details/:category" element={<ViewDetails/>} />
           <Route path="/admin/amount/details" element={<AmountDetails/>} />
           <Route path="/admin/all-details" element={<AdminDashBoard/>}/>
+          <Route path="/admin/certificate-request" element={<CertificateRequest/>}/>
+          <Route path="/admin/certificate/:id" element={<OneStudentCertificates/>}/>
+
           {/* <Route path="/admin/dashboard/view/all/details/in/student" element={<ViewAllStudent />} /> */}
           <Route path="/admin/dashboard/view/details/oneclass/:standard/:section/:category" element={ <ViewOneClass />} />
           <Route path="/admin/dashboard/view/details/oneStudent/:studentId/:category" element={ <OneStudent/>} />
@@ -100,11 +111,18 @@ function App() {
           <Route path="/student/attandance/:id/:standard/:section/:from" element={<StudentAttendance />} />
           <Route path="/student/mark/:id/:examType/:from" element={<Result/>} />
           <Route path="/student/time-table/:standard/:section/:from" element={<TimeTableInStudent/>}/>
-
+          {/* verify */}
+          <Route path="/verify/marks/by-parents/:from" element={<AllClasses/>}/>
+          <Route path="/verify/:total/:standard/:section/:from" element={<SeeVerifyMarksByClass/>}/>
           {/* parent */}
           <Route path="/parent/dashBoard" element={<ParentDashBoard/>} />
+          <Route path="/student/request-certificate/:id/parent" element={<RequestCertificate/>}/>
+          <Route path="/student/certificate/:id/parent" element={<StudentAllCertificatesRequest/>}/>
+          <Route path="/parent/certificate/:cer_id" element={<OneStudentCertificateInParent/>}/>
+          {/* certificate */}
+          <Route path="/certificate/:cer_name/:id/:cer_id" element={<CertificatesHome/>}/>
           {/* error */}
-          <Route path="/error/404-on/fetching/data" element={<ServerError/>}/>
+          <Route path="/*" element={<ServerError/>}/>
           {/* forget password */}
           <Route path="/forget/password/:from" element={<ForgetPassword/>} />
         </Routes>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import NavBar from './NavBar';
 
 export default function ViewTeachersDetails({ users }) {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export default function ViewTeachersDetails({ users }) {
 
   return (
     <div className="py-32 w-full px-5 md:px-20">
+      <NavBar/>
       <div className="flex items-center justify-center mb-8">
         <input
           type="search"
